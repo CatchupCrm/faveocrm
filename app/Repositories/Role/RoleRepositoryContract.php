@@ -1,18 +1,17 @@
 <?php
 namespace App\Repositories\Role;
- 
 interface RoleRepositoryContract
 {
-    
-    public function listAllRoles();
 
-    public function allPermissions();
+  public function listAllRoles();
 
-    public function allRoles();
+  public function allPermissions();
 
-    public function permissionsUpdate($requestData);
+  public function allRoles();
 
-    public function create($requestData);
+  public function permissionsUpdate($requestData);
 
-    public function destroy($id);
+  public function create($requestData);
+
+  public function destroy($id);
 }

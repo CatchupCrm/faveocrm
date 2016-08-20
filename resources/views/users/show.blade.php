@@ -1,165 +1,168 @@
 @extends('layouts.master')
 @section('heading')
-<script>$('#pagination a').on('click', function(e){
-    e.preventDefault();
-    var url = $('#search').attr('action')+'?page='+page;
-    $.post(url, $('#search').serialize(), function(data){
+  <script>$('#pagination a').on('click', function (e) {
+      e.preventDefault();
+      var url = $('#search').attr('action') + '?page=' + page;
+      $.post(url, $('#search').serialize(), function (data) {
         $('#posts').html(data);
-    });
-});</script>
-@stop
+      });
+    });</script>
+  @stop
 
-@section('content')
-@include('partials.userheader')
-  <!-- *********************************************************************
+  @section('content')
+  @include('partials.userheader')
+    <!-- *********************************************************************
      *                 Header end and top task start                   
      *********************************************************************-->
-      <div class="row">
-          <div class="col-lg-6 currenttask">
-          
+  <div class="row">
+    <div class="col-lg-6 currenttask">
 
-   <table class="table table-hover" id="opentask-table">
-   <h3>Open Tasks</h3>
+
+      <table class="table table-bordered table-striped" id="opentask-table">
+        <h3>Open Tasks</h3>
         <thead>
-            <tr>
-                
-                <th>Name</th>
-                <th>Created at</th>
-                <th>Deadline</th>
-                
-            </tr>
+        <tr>
+
+          <th>Name</th>
+          <th>Created at</th>
+          <th>Deadline</th>
+
+        </tr>
         </thead>
-    </table>
+      </table>
 
-             
-          </div>
-  <!-- *********************************************************************
-     *                     Open task end, Closed task start       
-     *********************************************************************-->
-          <div class="col-lg-6 currenttask">
-          
 
-   <table class="table table-hover" id="closedtask-table">
-   <h3>Closed Tasks</h3>
+    </div>
+    <!-- *********************************************************************
+       *                     Open task end, Closed task start
+       *********************************************************************-->
+    <div class="col-lg-6 currenttask">
+
+
+      <table class="table table-bordered table-striped" id="closedtask-table">
+        <h3>Closed Tasks</h3>
         <thead>
-            <tr>
-                
-                <th>Name</th>
-                <th>Created at</th>
-                <th>Deadline</th>
-                
-            </tr>
+        <tr>
+
+          <th>Name</th>
+          <th>Created at</th>
+          <th>Deadline</th>
+
+        </tr>
         </thead>
-    </table>
+      </table>
 
-          </div>
-  <!-- *********************************************************************
-     *               Closed task end assigned clients start    
-     *********************************************************************-->
-
-
-          <div class="col-lg-8 currenttask">
-          
+    </div>
+    <!-- *********************************************************************
+       *               Closed task end assigned clients start
+       *********************************************************************-->
 
 
-              
-        
-<table class="table table-hover" id="clients-table">
-   <h3>Assigned Clients</h3>
+    <div class="col-lg-8 currenttask">
+
+
+      <table class="table table-bordered table-striped" id="clients-table">
+        <h3>Assigned Clients</h3>
         <thead>
-            <tr>
-                
-                <th>Name</th>
-                <th>Company</th>
-                <th>Number</th>
-              
-                
-            </tr>
+        <tr>
+
+          <th>Name</th>
+          <th>Company</th>
+          <th>Number</th>
+
+
+        </tr>
         </thead>
-    </table>
-   </div>
-   <!-- *********************************************************************
- *               assigned clients end, Last 10 created task start    
- *********************************************************************-->
+      </table>
+    </div>
+    <!-- *********************************************************************
+  *               assigned clients end, Last 10 created task start
+  *********************************************************************-->
 
-                <div class="col-lg-4 currenttask">
-          
-                    <table class="table table-hover">
-         <h3>Last 10 created tasks</h3>
-            <thead>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Created at</th>
-        <th>Deadline</th> 
-      </tr>
-    </thead>
-    <tbody>
+    <div class="col-lg-4 currenttask">
 
-@foreach($user->tasksCreated as $task)
+      <table class="table table-bordered table-striped">
+        <h3>Last 10 created tasks</h3>
+        <thead>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Created at</th>
+          <th>Deadline</th>
+        </tr>
+        </thead>
+        <tbody>
 
-       <tr>
-<td>
-<a href="{{ route('tasks.show', $task->id)}}">
-{{ $task->title }}
-</a> </td>
-<td>{{date('d, M Y', strTotime($task->created_at))}} </td>
-<td>{{date('d, M Y', strTotime($task->deadline))}}</td>
-</tr>
-@endforeach
-              </tbody>
-              </table>
+        @foreach($user->tasksCreated as $task)
 
-          </div>
-         
+          <tr>
+            <td>
+              <a href="{{ route('tasks.show', $task->id)}}">
+                {{ $task->title }}
+              </a></td>
+            <td>{{date('d, M Y', strTotime($task->created_at))}} </td>
+            <td>{{date('d, M Y', strTotime($task->deadline))}}</td>
+          </tr>
+        @endforeach
+        </tbody>
+      </table>
 
-@stop
-@push('scripts')
-<script>
-$(function() {
-    $('#opentask-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('users.taskdata', ['id' => $user->id]) !!}',
-        columns: [
-            
-            { data: 'titlelink', name: 'title' },
-            { data: 'created_at', name: 'created_at' },
-            { data: 'deadline', name: 'deadline' },
-        ]
-    });
-});
-</script>
+    </div>
 
-<script>
-$(function() {
-    $('#clients-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('users.clientdata', ['id' => $user->id]) !!}',
-        columns: [
-            
-            { data: 'clientlink', name: 'name' },
-            { data: 'company_name', name: 'company_name' },
-             { data: 'primary_number', name: 'primary_number' },
 
-        ]
-    });
-});
-</script>
-<script>
-$(function() {
-    $('#closedtask-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('users.closedtaskdata', ['id' => $user->id]) !!}',
-        columns: [
-            
-            { data: 'titlelink', name: 'title' },
-            { data: 'created_at', name: 'created_at' },
-            { data: 'deadline', name: 'deadline' },
-        ]
-    });
-});
-</script>
-@endpush
+    @stop
+    @push('scripts')
+    <script>
+      $(function () {
+        $('#opentask-table').DataTable({
+          lengthMenu: [[15, 25, 50, -1], [15, 25, 50, "All"]],
+          iDisplayLength: 15,
+          processing: true,
+          serverSide: true,
+          ajax: '{!! route('users.taskdata', ['id' => $user->id]) !!}',
+          columns: [
+
+            {data: 'titlelink', name: 'title'},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'deadline', name: 'deadline'},
+          ]
+        });
+      });
+    </script>
+
+    <script>
+      $(function () {
+        $('#clients-table').DataTable({
+          processing: true,
+          serverSide: true,
+          lengthMenu: [[15, 25, 50, -1], [15, 25, 50, "All"]],
+          iDisplayLength: 15,
+          ajax: '{!! route('users.clientdata', ['id' => $user->id]) !!}',
+          columns: [
+
+            {data: 'clientlink', name: 'name'},
+            {data: 'company_name', name: 'company_name'},
+            {data: 'primary_number', name: 'primary_number'},
+
+          ]
+        });
+      });
+    </script>
+    <script>
+      $(function () {
+        $('#closedtask-table').DataTable({
+          processing: true,
+          serverSide: true,
+          lengthMenu: [[15, 25, 50, -1], [15, 25, 50, "All"]],
+          iDisplayLength: 15,
+          ajax: '{!! route('users.closedtaskdata', ['id' => $user->id]) !!}',
+          columns: [
+
+            {data: 'titlelink', name: 'title'},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'deadline', name: 'deadline'},
+          ]
+        });
+      });
+    </script>
+  @endpush

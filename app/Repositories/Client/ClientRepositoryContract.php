@@ -1,24 +1,23 @@
 <?php
 namespace App\Repositories\Client;
- 
 interface ClientRepositoryContract
 {
 
-    public function find($id);
-    
-    public function listAllClients();
+  public function find($id);
 
-    public function getInvoices($id);
+  public function listAllClients();
 
-    public function getAllClientsCount();
+  public function getInvoices($id);
 
-    public function listAllIndustries();
+  public function getAllClientsCount();
 
-    public function create($requestData);
+  public function listAllIndustries();
 
-    public function update($id, $requestData);
+  public function create($requestData);
 
-    public function destroy($id);
+  public function update($id, $requestData);
 
-    public function vat($requestData);
+  public function destroy($id);
+
+  public function vat($requestData);
 }

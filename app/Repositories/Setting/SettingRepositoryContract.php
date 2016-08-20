@@ -1,12 +1,11 @@
 <?php
 namespace App\Repositories\Setting;
- 
 interface SettingRepositoryContract
 {
-    
-    public function getCompanyName();
 
-    public function updateOverall($requestData);
+  public function getCompanyName();
 
-    public function getSetting();
+  public function updateOverall($requestData);
+
+  public function getSetting();
 }

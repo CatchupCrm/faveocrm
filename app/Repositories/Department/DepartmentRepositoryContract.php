@@ -1,14 +1,13 @@
 <?php
 namespace App\Repositories\Department;
- 
 interface DepartmentRepositoryContract
 {
 
-    public function getAllDepartments();
-    
-    public function listAllDepartments();
+  public function getAllDepartments();
 
-    public function create($requestData);
+  public function listAllDepartments();
 
-    public function destroy($id);
+  public function create($requestData);
+
+  public function destroy($id);
 }

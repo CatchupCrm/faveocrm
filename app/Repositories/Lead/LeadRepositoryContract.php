@@ -1,32 +1,31 @@
 <?php
 namespace App\Repositories\Lead;
- 
 interface LeadRepositoryContract
 {
 
-    public function find($id);
-    
-    public function create($requestData);
+  public function find($id);
 
-    public function updateStatus($id, $requestData);
+  public function create($requestData);
 
-    public function updateFollowup($id, $requestData);
+  public function updateStatus($id, $requestData);
 
-    public function updateAssign($id, $requestData);
+  public function updateFollowup($id, $requestData);
 
-    public function allLeads();
+  public function updateAssign($id, $requestData);
 
-    public function allCompletedLeads();
+  public function allLeads();
 
-    public function percantageCompleted();
+  public function allCompletedLeads();
 
-    public function completedLeadsToday();
+  public function percantageCompleted();
 
-    public function createdLeadsToday();
+  public function completedLeadsToday();
 
-    public function completedLeadsThisMonth();
+  public function createdLeadsToday();
 
-    public function createdLeadsMonthly();
+  public function completedLeadsThisMonth();
 
-    public function completedLeadsMonthly();
+  public function createdLeadsMonthly();
+
+  public function completedLeadsMonthly();
 }
