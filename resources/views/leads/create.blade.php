@@ -1,7 +1,11 @@
 @extends('layouts.master')
+
 @section('heading')
   <h1>Create Lead</h1>
-@stop
+@section('htmlheader_title', 'Leads')
+@section('contentheader_title', 'Create Lead')
+@endsection
+
 
 @section('content')
 
@@ -21,7 +25,7 @@
 
   <div class="form-inline">
     <div class="form-group col-lg-3 removeleft">
-      {!! Form::label('status', 'Status:', ['class' => 'control-label']) !!}
+      {!! Form::label('status', 'Status (static list):', ['class' => 'control-label']) !!}
       {!! Form::select('status', array(
       '1' => 'Contact Client', '2' => 'Completed'), null, ['class' => 'form-control'] )
    !!}

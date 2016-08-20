@@ -1,13 +1,15 @@
 <!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html lang="en">
-<title>Flarepoint CRM</title>
 
 @section('htmlheader')
 @include('layouts.partials.htmlheader')
-
 @show
 
-<!--
+  <!--
 BODY TAG OPTIONS:
 =================
 Apply one or more of the following classes to get the
@@ -27,7 +29,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="skin-blue sidebar-mini">
+<body class="skin-dk sidebar-mini">
 <div class="wrapper">
 
   @include('layouts.partials.mainheader')
@@ -55,10 +57,6 @@ desired effect
 @section('scripts')
   @include('layouts.partials.scripts')
 @show
-
-
-<script type="text/javascript" src="{{ URL::asset('js/dropzone.js') }}"></script>
-<script src="{{ URL::asset('js/semantic.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/sorttable.js') }}"></script>

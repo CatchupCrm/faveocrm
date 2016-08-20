@@ -21,7 +21,7 @@
     		"yajra/laravel-disqus": "^0.1.2",
 		    "dompdf/dompdf": "^0.6.1",
         "phpzen/laravel-rbac": "^0.2.0",
-        "baum/baum": "^1.0",
+        "baum/baum": "^1.1",
         "guzzlehttp/guzzle": "^6.2",
         "pusher/pusher-php-server": "^2.3",
         "fenos/notifynder": "3.1.*",
@@ -39,7 +39,9 @@
         "maatwebsite/excel": "~2.1.0",
         "acacha/admin-lte-template-laravel": "2.*",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "arcanedev/taxonomies": "^0.0.1",
+        "cviebrock/eloquent-taggable": "^2.0"
         
     },
     "require-dev": {

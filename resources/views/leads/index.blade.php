@@ -7,12 +7,10 @@
   <table class="table table-bordered table-striped" id="leads-table">
     <thead>
     <tr>
-
       <th>Name</th>
       <th>Created by</th>
       <th>Deadline</th>
       <th>Assigned</th>
-
     </tr>
     </thead>
   </table>

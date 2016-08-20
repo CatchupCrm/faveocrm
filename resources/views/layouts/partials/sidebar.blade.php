@@ -18,52 +18,35 @@
       </div>
       @endif
 
+        <!-- search form (Optional) -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control"
+                 placeholder="{{ trans('adminlte_lang::message.search') }}..."/>
+              <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
 
-        <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-
-
-        <li class="header">DashBoard</li>
-        <li><a href="{{route('dashboard', \Auth::id())}}" class=" list-group-item" data-parent="#MainMenu"><i
-              class="glyphicon glyphicon-dashboard"></i> Dashboard </a></li>
-
-        <li class="header">Users</li>
-        <li><a href="{{route('users.show', \Auth::id())}}"><i
-              class="glyphicon glyphicon-user"></i> Profile </a></li>
-        <li><a href="{{ route('users.index')}}">All Users</a></li>
-        @ifUserCan('user.create')
-        <li><a href="{{ route('users.create')}}">New User</a></li>
-        @endif
-
-
-        <li class="header">Relations</li>
-        <li><a href="{{ route('clients.index')}}">All Relations</a></li>
-        @ifUserCan('client.create')
-        <li><a href="{{ route('clients.create')}}">New Relation</a></li>
-        @endif
-
-
-        <li class="header">Leads</li>
-        <li><a href="{{ route('leads.index')}}">All Leads</a></li>
-        @ifUserCan('lead.create')
-        <li><a href="{{ route('leads.create')}}">New Lead</a></li>
-        @endif
-
-        <li class="header">Tickets</li>
-        <li><a href="{{ route('tasks.index')}}">All Tasks</a></li>
-        @ifUserCan('task.create')
-        <li><a href="{{ route('tasks.create')}}">New Task</a></li>
-        @endif
-
-        <li class="header">Settings</li>
-        @ifUserIs('administrator')
-        <li><a href="{{ route('settings.index')}}">Overall Settings</a></li>
-        <li><a href="{{ route('roles.index')}}">Role Management</a></li>
-        <li><a href="{{ route('integrations.index')}}">Integrations</a></li>
-        <li><a href="{{ route('departments.index')}}">All Departments</a></li>
-        <li><a href="{{ route('departments.create')}}">New Department</a></li>
-        @endif
-
+        <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i>
+            <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+        <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i
+              class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+            <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+          </ul>
+        </li>
       </ul><!-- /.sidebar-menu -->
   </section>
   <!-- /.sidebar -->

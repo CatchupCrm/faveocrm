@@ -2,6 +2,7 @@
 
 @section('heading')
   {{-- Breadcrumbs please --}}
+@section('htmlheader_title', 'Relations')
 @section('contentheader_title', 'View All Relations')
 @endsection
 
@@ -10,7 +11,6 @@
   <table class="table table-bordered table-striped" id="clients-table">
     <thead>
     <tr>
-
       <th>Name</th>
       <th>Company</th>
       <th>Email</th>
