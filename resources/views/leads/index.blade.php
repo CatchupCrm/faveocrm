@@ -1,4 +1,14 @@
 @extends('layouts.master')
+@section('Relations')
+  class="active"
+@stop
+@section('relations-bar')
+  active
+@stop
+@section('leads')
+  class="active"
+@stop
+
 @section('heading')
   <h1>All tasks</h1>
 @stop

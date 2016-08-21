@@ -6,7 +6,7 @@
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>D</b>K</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Admin</b>LTE Laravel </span>
+    <span class="logo-lg"><b>Digitaal</b> Kantoor</span>
   </a>
 
   <!-- Header Navbar -->
@@ -15,6 +15,16 @@
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
       <span class="sr-only">{{ trans('adminlte_lang::message.togglenav') }}</span>
     </a>
+
+    <ul class="tabs tabs-horizontal nav navbar-nav pull-left">
+      <li><a data-target="#tabA" href="#">Dashboard</a></li>
+      <li @yield('Documents')><a data-target="#tabF" href="#">Documents</a></li>
+      <li @yield('Bookkeeping')><a data-target="#tabB" href="#">Bookkeeping</a></li>
+      <li @yield('Relations')><a data-target="#tabD" href="#">Relations</a></li>
+      <li @yield('Trade')><a data-target="#tabC" href="#">Trade</a></li>
+      <li @yield('Projects')><a data-target="#tabE" href="#">Projects & Timesheets</a></li>
+    </ul>
+
     <!-- Navbar Right Menu -->
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
@@ -109,10 +119,11 @@
             </li>
           </ul>
         </li>
+
         @if (Auth::guest())
           <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
           <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
-          @else
+        @else
             <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -146,11 +157,11 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
+                  <a href="#" class="btn btn-info btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ url('/logout') }}"
-                     class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.signout') }}</a>
+                     class="btn btn-danger btn-flat">{{ trans('adminlte_lang::message.signout') }}</a>
                 </div>
               </li>
             </ul>

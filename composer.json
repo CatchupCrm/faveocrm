@@ -41,7 +41,8 @@
         "barryvdh/laravel-ide-helper": "^2.2",
         "doctrine/dbal": "^2.5",
         "arcanedev/taxonomies": "^0.0.1",
-        "cviebrock/eloquent-taggable": "^2.0"
+        "cviebrock/eloquent-taggable": "^2.0",
+        "cviebrock/laravel-elasticsearch": "^1.2"
         
     },
     "require-dev": {
