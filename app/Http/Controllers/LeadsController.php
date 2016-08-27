@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Leads;
 use App\User;
-use App\Client;
+use App\Relation;
 use App\Http\Requests;
 use Session;
 use App\Http\Controllers\Controller;
@@ -18,26 +18,26 @@ use App\Http\Requests\Lead\StoreLeadRequest;
 use App\Http\Requests\Lead\UpdateLeadFollowUpRequest;
 use App\Repositories\Lead\LeadRepositoryContract;
 use App\Repositories\User\UserRepositoryContract;
-use App\Repositories\Client\ClientRepositoryContract;
+use App\Repositories\Relation\RelationRepositoryContract;
 use App\Repositories\Setting\SettingRepositoryContract;
 
 class LeadsController extends Controller
 {
   protected $leads;
-  protected $clients;
+  protected $relations;
   protected $settings;
   protected $users;
 
   public function __construct(
     LeadRepositoryContract $leads,
     UserRepositoryContract $users,
-    ClientRepositoryContract $clients,
+    RelationRepositoryContract $relations,
     SettingRepositoryContract $settings
   )
   {
     $this->users = $users;
     $this->settings = $settings;
-    $this->clients = $clients;
+    $this->relations = $relations;
     $this->leads = $leads;
     $this->middleware('lead.create', ['only' => ['create']]);
     $this->middleware('lead.assigned', ['only' => ['updateAssign']]);
@@ -57,7 +57,7 @@ class LeadsController extends Controller
   public function anyData()
   {
     $leads = Leads::select(
-      ['id', 'title', 'fk_user_id_created', 'fk_client_id', 'fk_user_id_assign', 'contact_date']
+      ['id', 'title', 'fk_user_id_created', 'fk_relation_id', 'fk_user_id_assign', 'contact_date']
     )->where('status', 1)->get();
     return Datatables::of($leads)
       ->addColumn('titlelink', function ($leads) {
@@ -84,7 +84,7 @@ class LeadsController extends Controller
   {
     return view('leads.create')
       ->withUsers($this->users->getAllUsersWithDepartments())
-      ->withClients($this->clients->listAllClients());
+      ->withRelations($this->relations->listAllRelations());
   }
 
   /**

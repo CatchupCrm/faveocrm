@@ -12,14 +12,14 @@
   @section('content')
   @include('partials.userheader')
     <!-- *********************************************************************
-     *                 Header end and top task start                   
+     *                 Header end and top ticket start
      *********************************************************************-->
   <div class="row">
-    <div class="col-lg-6 currenttask">
+    <div class="col-lg-6 currentticket">
 
 
-      <table class="table table-bordered table-striped" id="opentask-table">
-        <h3>Open Tasks</h3>
+      <table class="table table-bordered table-striped" id="openticket-table">
+        <h3>Open Tickets</h3>
         <thead>
         <tr>
 
@@ -34,13 +34,13 @@
 
     </div>
     <!-- *********************************************************************
-       *                     Open task end, Closed task start
+       *                     Open ticket end, Closed ticket start
        *********************************************************************-->
-    <div class="col-lg-6 currenttask">
+    <div class="col-lg-6 currentticket">
 
 
-      <table class="table table-bordered table-striped" id="closedtask-table">
-        <h3>Closed Tasks</h3>
+      <table class="table table-bordered table-striped" id="closedticket-table">
+        <h3>Closed Tickets</h3>
         <thead>
         <tr>
 
@@ -54,15 +54,15 @@
 
     </div>
     <!-- *********************************************************************
-       *               Closed task end assigned clients start
+       *               Closed ticket end assigned relations start
        *********************************************************************-->
 
 
-    <div class="col-lg-8 currenttask">
+    <div class="col-lg-8 currentticket">
 
 
-      <table class="table table-bordered table-striped" id="clients-table">
-        <h3>Assigned Clients</h3>
+      <table class="table table-bordered table-striped" id="relations-table">
+        <h3>Assigned Relations</h3>
         <thead>
         <tr>
 
@@ -76,13 +76,13 @@
       </table>
     </div>
     <!-- *********************************************************************
-  *               assigned clients end, Last 10 created task start
+  *               assigned relations end, Last 10 created ticket start
   *********************************************************************-->
 
-    <div class="col-lg-4 currenttask">
+    <div class="col-lg-4 currentticket">
 
       <table class="table table-bordered table-striped">
-        <h3>Last 10 created tasks</h3>
+        <h3>Last 10 created tickets</h3>
         <thead>
         <thead>
         <tr>
@@ -93,15 +93,15 @@
         </thead>
         <tbody>
 
-        @foreach($user->tasksCreated as $task)
+        @foreach($user->ticketsCreated as $ticket)
 
           <tr>
             <td>
-              <a href="{{ route('tasks.show', $task->id)}}">
-                {{ $task->title }}
+              <a href="{{ route('tickets.show', $ticket->id)}}">
+                {{ $ticket->title }}
               </a></td>
-            <td>{{date('d, M Y', strTotime($task->created_at))}} </td>
-            <td>{{date('d, M Y', strTotime($task->deadline))}}</td>
+            <td>{{date('d, M Y', strTotime($ticket->created_at))}} </td>
+            <td>{{date('d, M Y', strTotime($ticket->deadline))}}</td>
           </tr>
         @endforeach
         </tbody>
@@ -114,12 +114,12 @@
     @push('scripts')
     <script>
       $(function () {
-        $('#opentask-table').DataTable({
+        $('#openticket-table').DataTable({
           lengthMenu: [[15, 25, 50, -1], [15, 25, 50, "All"]],
           iDisplayLength: 15,
           processing: true,
           serverSide: true,
-          ajax: '{!! route('users.taskdata', ['id' => $user->id]) !!}',
+          ajax: '{!! route('users.ticketdata', ['id' => $user->id]) !!}',
           columns: [
 
             {data: 'titlelink', name: 'title'},
@@ -132,15 +132,15 @@
 
     <script>
       $(function () {
-        $('#clients-table').DataTable({
+        $('#relations-table').DataTable({
           processing: true,
           serverSide: true,
           lengthMenu: [[15, 25, 50, -1], [15, 25, 50, "All"]],
           iDisplayLength: 15,
-          ajax: '{!! route('users.clientdata', ['id' => $user->id]) !!}',
+          ajax: '{!! route('users.relationdata', ['id' => $user->id]) !!}',
           columns: [
 
-            {data: 'clientlink', name: 'name'},
+            {data: 'relationlink', name: 'name'},
             {data: 'company_name', name: 'company_name'},
             {data: 'primary_number', name: 'primary_number'},
 
@@ -150,12 +150,12 @@
     </script>
     <script>
       $(function () {
-        $('#closedtask-table').DataTable({
+        $('#closedticket-table').DataTable({
           processing: true,
           serverSide: true,
           lengthMenu: [[15, 25, 50, -1], [15, 25, 50, "All"]],
           iDisplayLength: 15,
-          ajax: '{!! route('users.closedtaskdata', ['id' => $user->id]) !!}',
+          ajax: '{!! route('users.closedticketdata', ['id' => $user->id]) !!}',
           columns: [
 
             {data: 'titlelink', name: 'title'},

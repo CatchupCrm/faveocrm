@@ -40,26 +40,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
   protected $primaryKey = 'id';
 
-  public function tasksAssign()
+  public function ticketsAssign()
   {
-    return $this->hasMany('App\Tasks', 'fk_user_id_assign', 'id')
+    return $this->hasMany('App\Ticket', 'fk_user_id_assign', 'id')
       ->where('status', 1)
       ->orderBy('deadline', 'asc');
   }
 
-  public function tasksCreated()
+  public function ticketsCreated()
   {
-    return $this->hasMany('App\Tasks', 'fk_user_id_created', 'id')->limit(10);
+    return $this->hasMany('App\Ticket', 'fk_user_id_created', 'id')->limit(10);
   }
 
-  public function tasksCompleted()
+  public function ticketsCompleted()
   {
-    return $this->hasMany('App\Tasks', 'fk_user_id_assign', 'id')->where('status', 2);
+    return $this->hasMany('App\Ticket', 'fk_user_id_assign', 'id')->where('status', 2);
   }
 
-  public function tasksAll()
+  public function ticketsAll()
   {
-    return $this->hasMany('App\Tasks', 'fk_user_id_assign', 'id')->whereIn('status', [1, 2]);
+    return $this->hasMany('App\Ticket', 'fk_user_id_assign', 'id')->whereIn('status', [1, 2]);
   }
 
   public function leadsAll()
@@ -72,9 +72,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     return $this->belongsTo('App\Settings');
   }
 
-  public function clientsAssign()
+  public function relationsAssign()
   {
-    return $this->hasMany('App\Client', 'fk_user_id', 'id');
+    return $this->hasMany('App\Relation', 'fk_user_id', 'id');
   }
 
   public function userRole()

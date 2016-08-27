@@ -2,7 +2,7 @@
 namespace App\Repositories\User;
 
 use App\User;
-use App\Tasks;
+use App\Ticket;
 use App\Settings;
 use Session;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use PHPZen\LaravelRbac\Traits\Rbac;
 use App\Role;
 use Auth;
 use Illuminate\Support\Facades\Input;
-use App\Client;
+use App\Relation;
 use App\Department;
 use DB;
 
@@ -55,7 +55,7 @@ class UserRepository implements UserRepositoryContract
       $companyname = $settings->company;
       $file = $requestData->file('image_path');
       $destinationPath = public_path() . '/images/' . $companyname;
-      $filename = str_random(8) . '_' . $file->getClientOriginalName();
+      $filename = str_random(8) . '_' . $file->getRelationOriginalName();
       $file->move($destinationPath, $filename);
       $input = array_replace($requestData->all(), ['image_path' => "$filename", 'password' => "$password"]);
     } else {
@@ -80,7 +80,7 @@ class UserRepository implements UserRepositoryContract
       $companyname = $settings->company;
       $file = $requestData->file('image_path');
       $destinationPath = public_path() . '\\images\\' . $companyname;
-      $filename = str_random(8) . '_' . $file->getClientOriginalName();
+      $filename = str_random(8) . '_' . $file->getRelationOriginalName();
       $file->move($destinationPath, $filename);
       if ($requestData->password == "") {
         $input = array_replace($requestData->except('password'), ['image_path' => "$filename"]);
@@ -112,7 +112,7 @@ class UserRepository implements UserRepositoryContract
       Session()->flash('flash_message', 'User successfully deleted');
 
     } catch (\Illuminate\Database\QueryException $e) {
-      Session()->flash('flash_message_warning', 'User can NOT have, leads, clients, or tasks assigned when deleted');
+      Session()->flash('flash_message_warning', 'User can NOT have, leads, relations, or tickets assigned when deleted');
     }
 
   }

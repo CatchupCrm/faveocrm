@@ -16,8 +16,8 @@ class SettingsTableSeeder extends Seeder
       0 =>
         array(
           'id' => 1,
-          'task_complete_allowed' => 2,
-          'task_assign_allowed' => 2,
+          'ticket_complete_allowed' => 2,
+          'ticket_assign_allowed' => 2,
           'lead_complete_allowed' => 2,
           'lead_assign_allowed' => 2,
           'time_change_allowed' => 2,

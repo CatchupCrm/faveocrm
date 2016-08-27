@@ -7,14 +7,14 @@ class Comment extends Model
 {
   protected $fillable = [
     'description',
-    'fk_task_id',
+    'fk_ticket_id',
     'fk_user_id'
   ];
   protected $hidden = ['remember_token'];
 
-  public function task()
+  public function ticket()
   {
-    return $this->belongsTo('App\Tasks', 'fk_task_id', 'id');
+    return $this->belongsTo('App\Ticket', 'fk_ticket_id', 'id');
   }
 
   public function user()

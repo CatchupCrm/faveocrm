@@ -22,47 +22,75 @@
 Route::group(['middleware' => 'web'], function () {
   Route::auth();
 });
+
 Route::group(['middleware' => ['web', 'auth']], function () {
-  Route::get('/', 'PagesController@dashboard');
-  Route::get('users/data', 'UsersController@anyData')->name('users.data');
-  Route::get('users/taskdata/{id}', 'UsersController@taskData')->name('users.taskdata');
-  Route::get('users/closedtaskdata/{id}', 'UsersController@closedTaskData')->name('users.closedtaskdata');
-  Route::get('users/clientdata/{id}', 'UsersController@clientData')->name('users.clientdata');
-  Route::get('clients/data', 'ClientsController@anyData')->name('clients.data');
-  Route::get('tasks/data', 'TasksController@anyData')->name('tasks.data');
+
+  Route::get('dashboard', 'PagesController@dashboard')->name('dashboard');
+
+  //  Get Data for the jsons for the DataTables
+  Route::get('relations/data', 'RelationsController@anyData')->name('relations.data');
+  Route::get('tickets/data', 'TicketsController@anyData')->name('tickets.data');
   Route::get('leads/data', 'LeadsController@anyData')->name('leads.data');
-  Route::resource('users', 'UsersController');
-  Route::post('clients/create/cvrapi', 'ClientsController@cvrapiStart');
-  Route::post('clients/upload/{id}', 'DocumentsController@upload');
-  Route::resource('clients', 'ClientsController');
-  Route::get('settings', 'SettingsController@index')->name('settings.index');
-  Route::patch('settings/permissionsUpdate', 'SettingsController@permissionsUpdate');
-  Route::post('settings/stripe', 'SettingsController@stripe');
-  Route::patch('settings/overall', 'SettingsController@updateOverall');
-  Route::patch('tasks/updatestatus/{id}', 'TasksController@updateStatus');
-  Route::patch('tasks/updateassign/{id}', 'TasksController@updateAssign');
-  Route::post('tasks/updatetime/{id}', 'TasksController@updateTime');
-  Route::post('tasks/invoice/{id}', 'TasksController@invoice');
-  Route::patch('leads/updateassign/{id}', 'LeadsController@updateAssign');
-  Route::resource('tasks', 'TasksController');
+  Route::get('invoices/data', 'LeadsController@anyData')->name('invoices.data');
+  Route::get('documents/data', 'LeadsController@anyData')->name('documents.data');
+
+  Route::get('notifications/data', 'LeadsController@anyData')->name('notifications.data');
+  Route::get('mailboxes/data', 'LeadsController@anyData')->name('mailboxes.data');
+  Route::get('emails/data', 'LeadsController@anyData')->name('emails.data');
+  Route::get('roles/data', 'LeadsController@anyData')->name('roles.data');
+  Route::get('departments/data', 'LeadsController@anyData')->name('departments.data');
+  Route::get('users/data', 'LeadsController@anyData')->name('users.data');
+  Route::get('permissions/data', 'LeadsController@anyData')->name('permissions.data');
+
+  Route::resource('relations', 'RelationsController');
+  Route::post('relations/create/cvrapi', 'RelationsController@cvrapiStart');
+  Route::post('relations/upload/{id}', 'DocumentsController@upload');
+
   Route::resource('leads', 'LeadsController');
-  Route::post('tasks/comments/{id}', 'CommentController@store');
+  Route::patch('leads/updateassign/{id}', 'LeadsController@updateAssign');
   Route::post('leads/notes/{id}', 'NotesController@store');
   Route::patch('leads/updatestatus/{id}', 'LeadsController@updateStatus');
   Route::patch('leads/updatefollowup/{id}', 'LeadsController@updateFollowup')->name('leads.followup');
-  Route::resource('departments', 'DepartmentsController');
-  Route::resource('roles', 'RolesController');
-  Route::get('dashboard', 'PagesController@dashboard')->name('dashboard');
-  Route::resource('integrations', 'IntegrationsController');
+
+  Route::resource('tickets', 'TicketsController');
+  Route::patch('tickets/updatestatus/{id}', 'TicketsController@updateStatus');
+  Route::patch('tickets/updateassign/{id}', 'TicketsController@updateAssign');
+  Route::post('tickets/updatetime/{id}', 'TicketsController@updateTime');
+  Route::post('tickets/invoice/{id}', 'TicketsController@invoice');
+  Route::post('tickets/comments/{id}', 'CommentController@store');
+
   //Notifications
   Route::get('notifications/getall', 'NotificationsController@getAll')->name('notifications.get');
   Route::post('notifications/markread', 'NotificationsController@markRead');
   Route::get('notifications/markall', 'NotificationsController@markAll');
+
+  Route::get('settings', 'SettingsController@index')->name('settings.index');
+  Route::patch('settings/permissionsUpdate', 'SettingsController@permissionsUpdate');
+  Route::post('settings/stripe', 'SettingsController@stripe');
+  Route::patch('settings/overall', 'SettingsController@updateOverall');
+
+  Route::resource('departments', 'DepartmentsController');
+
+  Route::resource('roles', 'RolesController');
+
+  Route::resource('integrations', 'IntegrationsController');
+
   Route::resource('invoices', 'InvoicesController');
-  Route::get('documents/import', 'DocumentsController@import');
+
   Route::post('invoice/updatepayment/{id}', 'InvoicesController@updatePayment')->name('invoice.payment.date');
   Route::post('invoice/reopenpayment/{id}', 'InvoicesController@reopenPayment')->name('invoice.payment.reopen');
   Route::post('invoice/sentinvoice/{id}', 'InvoicesController@updateSentStatus')->name('invoice.sent');
   Route::post('invoice/reopensentinvoice/{id}', 'InvoicesController@updateSentReopen')->name('invoice.sent.reopen');
   Route::post('invoice/newitem/{id}', 'InvoicesController@newItem')->name('invoice.new.item');
+
+  Route::get('documents/import', 'DocumentsController@import');
+
+  Route::resource('users', 'UsersController');
+  Route::get('users/data', 'UsersController@anyData')->name('users.data');
+  Route::get('users/ticketdata/{id}', 'UsersController@ticketData')->name('users.ticketdata');
+  Route::get('users/closedticketdata/{id}', 'UsersController@closedTaskData')->name('users.closedticketdata');
+  Route::get('users/relationdata/{id}', 'UsersController@relationData')->name('users.relationdata');
+
+
+  Route::get('/', 'PagesController@dashboard');
 });

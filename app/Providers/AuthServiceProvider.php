@@ -1,7 +1,7 @@
 <?php
 namespace App\Providers;
 
-use App\Tasks;
+use App\Ticket;
 use App\User;
 use App\Policies\allowTaskComplete;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
    */
   protected $policies = [
     'App\Model' => 'App\Policies\ModelPolicy',
-    Tasks::class => allowTaskComplete::class,
+    Tickets::class => allowTaskComplete::class,
   ];
 
   /**

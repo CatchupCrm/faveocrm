@@ -30,35 +30,35 @@ class PermissionsTableSeeder extends Seeder
     $deleteUser->description = 'Permission to update delete';
     $deleteUser->save();
     /**
-     * Client Permissions
+     * Relation Permissions
      */
-    $createClient = new Permissions;
-    $createClient->name = 'Create client';
-    $createClient->slug = 'client.create';
-    $createClient->description = 'Permission to create client';
-    $createClient->save();
-    $updateClient = new Permissions;
-    $updateClient->name = 'Update client';
-    $updateClient->slug = 'client.update';
-    $updateClient->description = 'Permission to update client';
-    $updateClient->save();
-    $deleteClient = new Permissions;
-    $deleteClient->name = 'Delete client';
-    $deleteClient->slug = 'client.delete';
-    $deleteClient->description = 'Permission to delete client';
-    $deleteClient->save();
+    $createRelation = new Permissions;
+    $createRelation->name = 'Create relation';
+    $createRelation->slug = 'relation.create';
+    $createRelation->description = 'Permission to create relation';
+    $createRelation->save();
+    $updateRelation = new Permissions;
+    $updateRelation->name = 'Update relation';
+    $updateRelation->slug = 'relation.update';
+    $updateRelation->description = 'Permission to update relation';
+    $updateRelation->save();
+    $deleteRelation = new Permissions;
+    $deleteRelation->name = 'Delete relation';
+    $deleteRelation->slug = 'relation.delete';
+    $deleteRelation->description = 'Permission to delete relation';
+    $deleteRelation->save();
     /**
-     * Tasks Permissions
+     * Tickets Permissions
      */
     $createTask = new Permissions;
-    $createTask->name = 'Create task';
-    $createTask->slug = 'task.create';
-    $createTask->description = 'Permission to create task';
+    $createTask->name = 'Create ticket';
+    $createTask->slug = 'ticket.create';
+    $createTask->description = 'Permission to create ticket';
     $createTask->save();
     $updateTask = new Permissions;
-    $updateTask->name = 'Update task';
-    $updateTask->slug = 'task.update';
-    $updateTask->description = 'Permission to update task';
+    $updateTask->name = 'Update ticket';
+    $updateTask->slug = 'ticket.update';
+    $updateTask->description = 'Permission to update ticket';
     $updateTask->save();
     /**
      * Leads Permissions

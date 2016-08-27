@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
   protected $fillable = [
-    'task_complete_allowed',
-    'task_assign_allowed',
+    'ticket_complete_allowed',
+    'ticket_assign_allowed',
     'lead_complete_allowed',
     'lead_assign_allowed'
   ];
@@ -17,8 +17,8 @@ class Settings extends Model
     return $this->belongsTo('App\User');
   }
 
-  public function tasks()
+  public function tickets()
   {
-    return $this->belongsTo('App\Tasks');
+    return $this->belongsTo('App\Ticket');
   }
 }

@@ -2,7 +2,7 @@
 namespace App\Repositories\Invoice;
 
 use App\Invoice;
-use App\Clients;
+use App\Relations;
 use App\TaskTime;
 
 class InvoiceRepository implements InvoiceRepositoryContract
@@ -18,14 +18,14 @@ class InvoiceRepository implements InvoiceRepositoryContract
     return Invoice::findOrFail($id);
   }
 
-  public function create($clientid, $timetaskid, $requestData)
+  public function create($relationid, $timeticketid, $requestData)
   {
     $invoice = Invoice::create();
-    $invoice->clients()->attach($clientid);
-    foreach ($timetaskid as $tk) {
+    $invoice->relations()->attach($relationid);
+    foreach ($timeticketid as $tk) {
       $testid[] = $tk->id;
     }
-    $invoice->tasktime()->attach($testid);
+    $invoice->tickettime()->attach($testid);
     $invoice->save();
   }
 
@@ -61,13 +61,13 @@ class InvoiceRepository implements InvoiceRepositoryContract
   public function newItem($id, $requestData)
   {
     $invoice = invoice::findOrFail($id);
-    $tasktimeId = $invoice->tasktime()->first()->fk_task_id;
-    $clientid = $invoice->clients()->first()->id;
-    $input = array_replace($requestData->all(), ['fk_task_id' => "$tasktimeId"]);
-    $tasktime = TaskTime::create($input);
-    $insertedId = $tasktime->id;
-    $invoice->tasktime()->attach($insertedId);
-    $invoice->clients()->attach($clientid);
+    $tickettimeId = $invoice->tickettime()->first()->fk_ticket_id;
+    $relationid = $invoice->relations()->first()->id;
+    $input = array_replace($requestData->all(), ['fk_ticket_id' => "$tickettimeId"]);
+    $tickettime = TaskTime::create($input);
+    $insertedId = $tickettime->id;
+    $invoice->tickettime()->attach($insertedId);
+    $invoice->relations()->attach($relationid);
 
   }
 

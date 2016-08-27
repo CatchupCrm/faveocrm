@@ -3,9 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tasks;
+use App\Ticket;
 use App\User;
-use App\Client;
+use App\Relation;
 use Illuminate\Http\Request;
 use Gate;
 use App\TaskTime;
@@ -18,36 +18,36 @@ use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTimeTaskRequest;
 use App\Repositories\Task\TaskRepositoryContract;
 use App\Repositories\User\UserRepositoryContract;
-use App\Repositories\Client\ClientRepositoryContract;
+use App\Repositories\Relation\RelationRepositoryContract;
 use App\Repositories\Setting\SettingRepositoryContract;
 use App\Repositories\Invoice\InvoiceRepositoryContract;
 
-class TasksController extends Controller
+class TicketsController extends Controller
 {
 
   protected $request;
-  protected $tasks;
-  protected $clients;
+  protected $tickets;
+  protected $relations;
   protected $settings;
   protected $users;
   protected $invoices;
 
   public function __construct(
-    TaskRepositoryContract $tasks,
+    TaskRepositoryContract $tickets,
     UserRepositoryContract $users,
-    ClientRepositoryContract $clients,
+    RelationRepositoryContract $relations,
     InvoiceRepositoryContract $invoices,
     SettingRepositoryContract $settings
   )
   {
-    $this->tasks = $tasks;
+    $this->tickets = $tickets;
     $this->users = $users;
-    $this->clients = $clients;
+    $this->relations = $relations;
     $this->invoices = $invoices;
     $this->settings = $settings;
-    $this->middleware('task.create', ['only' => ['create']]);
-    $this->middleware('task.update.status', ['only' => ['updateStatus']]);
-    $this->middleware('task.assigned', ['only' => ['updateAssign', 'updateTime']]);
+    $this->middleware('ticket.create', ['only' => ['create']]);
+    $this->middleware('ticket.update.status', ['only' => ['updateStatus']]);
+    $this->middleware('ticket.assigned', ['only' => ['updateAssign', 'updateTime']]);
   }
 
   /**
@@ -57,29 +57,29 @@ class TasksController extends Controller
    */
   public function index()
   {
-    return view('tasks.index');
+    return view('tickets.index');
   }
 
   public function anyData()
   {
-    $tasks = Tasks::select(
+    $tickets = Tickets::select(
       ['id', 'title', 'created_at', 'deadline', 'fk_user_id_assign']
     )
       ->where('status', 1)->get();
-    return Datatables::of($tasks)
-      ->addColumn('titlelink', function ($tasks) {
-        return '<a href="tasks/' . $tasks->id . '" ">' . $tasks->title . '</a>';
+    return Datatables::of($tickets)
+      ->addColumn('titlelink', function ($tickets) {
+        return '<a href="tickets/' . $tickets->id . '" ">' . $tickets->title . '</a>';
       })
-      ->editColumn('created_at', function ($tasks) {
-        return $tasks->created_at ? with(new Carbon($tasks->created_at))
+      ->editColumn('created_at', function ($tickets) {
+        return $tickets->created_at ? with(new Carbon($tickets->created_at))
           ->format('d/m/Y') : '';
       })
-      ->editColumn('deadline', function ($tasks) {
-        return $tasks->created_at ? with(new Carbon($tasks->created_at))
+      ->editColumn('deadline', function ($tickets) {
+        return $tickets->created_at ? with(new Carbon($tickets->created_at))
           ->format('d/m/Y') : '';
       })
-      ->editColumn('fk_user_id_assign', function ($tasks) {
-        return $tasks->assignee->name;
+      ->editColumn('fk_user_id_assign', function ($tickets) {
+        return $tickets->assignee->name;
       })->make(true);
   }
 
@@ -91,9 +91,9 @@ class TasksController extends Controller
    */
   public function create()
   {
-    return view('tasks.create')
+    return view('tickets.create')
       ->withUsers($this->users->getAllUsersWithDepartments())
-      ->withClients($this->clients->listAllClients());
+      ->withRelations($this->relations->listAllRelations());
   }
 
   /**
@@ -103,8 +103,8 @@ class TasksController extends Controller
    */
   public function store(StoreTaskRequest $request) // uses __contrust request
   {
-    $getInsertedId = $this->tasks->create($request);
-    return redirect()->route("tasks.show", $getInsertedId);
+    $getInsertedId = $this->tickets->create($request);
+    return redirect()->route("tickets.show", $getInsertedId);
   }
 
 
@@ -125,11 +125,11 @@ class TasksController extends Controller
       $apiConnected = false;
       $invoiceContacts = array();
     }
-    return view('tasks.show')
-      ->withTasks($this->tasks->find($id))
+    return view('tickets.show')
+      ->withTickets($this->tickets->find($id))
       ->withUsers($this->users->getAllUsersWithDepartments())
       ->withContacts($invoiceContacts)
-      ->withTasktimes($this->tasks->getTaskTime($id))
+      ->withTasktimes($this->tickets->getTaskTime($id))
       ->withCompanyname($this->settings->getCompanyName())
       ->withApiconnected($apiConnected);
   }
@@ -139,42 +139,42 @@ class TasksController extends Controller
    * Sees if the Settings from backend allows all to complete taks
    * or only assigned user. if only assigned user:
    * @param  [Auth]  $id Checks Logged in users id
-   * @param  [Model] $task->fk_user_id_assign Checks the id of the user assigned to the task
+   * @param  [Model] $ticket->fk_user_id_assign Checks the id of the user assigned to the ticket
    * If Auth and fk_user_id allow complete else redirect back if all allowed excute
    * else stmt*/
   public function updateStatus($id, Request $request)
   {
-    $this->tasks->updateStatus($id, $request);
-    Session()->flash('flash_message', 'Task is completed');
+    $this->tickets->updateStatus($id, $request);
+    Session()->flash('flash_message', 'Ticket is completed');
     return redirect()->back();
   }
 
 
   public function updateAssign($id, Request $request)
   {
-    $clientId = $this->tasks->getAssignedClient($id)->id;
-    $this->tasks->updateAssign($id, $request);
+    $relationId = $this->tickets->getAssignedRelation($id)->id;
+    $this->tickets->updateAssign($id, $request);
     Session()->flash('flash_message', 'New user is assigned');
     return redirect()->back();
   }
 
   public function updateTime($id, Request $request)
   {
-    $this->tasks->updateTime($id, $request);
+    $this->tickets->updateTime($id, $request);
     Session()->flash('flash_message', 'Time has been updated');
     return redirect()->back();
   }
 
   public function invoice($id, Request $request)
   {
-    $task = Tasks::findOrFail($id);
-    $clientId = $task->clientAssignee()->first()->id;
-    $timeTaskId = $task->allTime()->get();
+    $ticket = Tickets::findOrFail($id);
+    $relationId = $ticket->relationAssignee()->first()->id;
+    $timeTaskId = $ticket->allTime()->get();
     $integrationCheck = Integration::first();
     if ($integrationCheck) {
-      $this->tasks->invoice($id, $request);
+      $this->tickets->invoice($id, $request);
     }
-    $this->invoices->create($clientId, $timeTaskId, $request->all());
+    $this->invoices->create($relationId, $timeTaskId, $request->all());
     Session()->flash('flash_message', 'Invoice created');
     return redirect()->back();
   }

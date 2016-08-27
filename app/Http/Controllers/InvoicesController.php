@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Repositories\Invoice\InvoiceRepositoryContract;
-use App\Repositories\Client\ClientRepositoryContract;
+use App\Repositories\Relation\RelationRepositoryContract;
 
 class InvoicesController extends Controller
 {
 
-  protected $clients;
+  protected $relations;
   protected $invoices;
 
   public function __construct(
     InvoiceRepositoryContract $invoices,
-    ClientRepositoryContract $clients
+    RelationRepositoryContract $relations
   )
   {
     $this->invoices = $invoices;
-    $this->clients = $clients;
+    $this->relations = $relations;
   }
 
   /**

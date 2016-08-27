@@ -5,14 +5,14 @@
       <span class="info-box-icon"><i class="ion ion-ios-book-outline"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">All Tasks</span>
-        <span class="info-box-number">{{$allCompletedTasks}} / {{$alltasks}}</span>
+        <span class="info-box-text">All Tickets</span>
+        <span class="info-box-number">{{$allCompletedTickets}} / {{$alltickets}}</span>
 
         <div class="progress">
-          <div class="progress-bar" style="width: {{$totalPercentageTasks}}%"></div>
+          <div class="progress-bar" style="width: {{$totalPercentageTickets}}%"></div>
         </div>
                   <span class="progress-description">
-                    {{number_format($totalPercentageTasks, 0)}}% Completed
+                    {{number_format($totalPercentageTickets, 0)}}% Completed
                   </span>
       </div>
       <!-- /.info-box-content -->
@@ -52,9 +52,9 @@
       <a href="{{route('users.show', $user->id)}}">
         <img class="small-profile-picture" data-toggle="tooltip" title="{{$user->name}}" data-placement="left"
              @if($user->image_path != "")
-             src="images/{{$companyname}}/{{$user->image_path}}"
+             src="#"
              @else
-             src="images/default_avatar.jpg"
+             src="#"
           @endif />
       </a>
     </div>
@@ -78,7 +78,7 @@
       <div class="box-header with-border">
         <h4 class="box-title"
         >
-          Tasks created each Month
+          Tickets created each Month
         </h4>
         <div class="box-tools pull-right">
           <button type="button" id="collapse1" class="btn btn-box-tool" data-toggle="collapse"
@@ -90,8 +90,8 @@
         <div class="box-body">
           <div>
             <graphline class="chart" :labels="{{json_encode($createdTaskEachMonths)}}"
-                       :values="{{json_encode($taskCreated)}}"
-                       :valuesextra="{{json_encode($taskCompleted)}}"></graphline>
+                       :values="{{json_encode($ticketCreated)}}"
+                       :valuesextra="{{json_encode($ticketCompleted)}}"></graphline>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
       <div class="box-header with-border">
         <h4 class="box-title"
         >
-          Tasks completed each month
+          Tickets completed each month
         </h4>
         <div class="box-tools pull-right">
           <button type="button" id="collapse3" class="btn btn-box-tool" data-toggle="collapse"
@@ -135,7 +135,7 @@
         <div class="box-body">
           <div>
             <graphline class="chart" :labels="{{json_encode($completedTaskEachMonths)}}"
-                       :values="{{json_encode($taskCompleted)}}"></graphline>
+                       :values="{{json_encode($ticketCompleted)}}"></graphline>
           </div>
         </div>
       </div>
@@ -175,8 +175,8 @@
       <span class="info-box-icon bg-aqua"><i class="ion ion-ios-book-outline"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Tasks completed today</span>
-        <span class="info-box-number">{{$completedTasksToday}}
+        <span class="info-box-text">Tickets completed today</span>
+        <span class="info-box-number">{{$completedTicketsToday}}
           <small></small></span>
       </div>
       <!-- /.info-box-content -->
@@ -189,8 +189,8 @@
       <span class="info-box-icon bg-red"><i class="ion ion-ios-book-outline"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Tasks created today</span>
-        <span class="info-box-number">{{$createdTasksToday}}</span>
+        <span class="info-box-text">Tickets created today</span>
+        <span class="info-box-number">{{$createdTicketsToday}}</span>
       </div>
       <!-- /.info-box-content -->
     </div>
@@ -225,5 +225,5 @@
       <!-- /.info-box-content -->
     </div>
     <!-- /.info-box -->
-    
-    
+  </div>
+</div>

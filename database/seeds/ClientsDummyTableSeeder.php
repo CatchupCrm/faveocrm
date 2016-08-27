@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 
-class ClientsDummyTableSeeder extends Seeder
+class RelationsDummyTableSeeder extends Seeder
 {
 
   /**
@@ -11,7 +11,7 @@ class ClientsDummyTableSeeder extends Seeder
    */
   public function run()
   {
-    factory(App\Client::class, 50)->create()->each(function ($c) {
+    factory(App\Relation::class, 50)->create()->each(function ($c) {
 
     });
   }

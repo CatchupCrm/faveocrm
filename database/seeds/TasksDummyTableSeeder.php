@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 
-class TasksDummyTableSeeder extends Seeder
+class TicketsDummyTableSeeder extends Seeder
 {
 
   /**
@@ -11,7 +11,7 @@ class TasksDummyTableSeeder extends Seeder
    */
   public function run()
   {
-    factory(App\Tasks::class, 175)->create()->each(function ($c) {
+    factory(App\Ticket::class, 175)->create()->each(function ($c) {
 
     });
   }

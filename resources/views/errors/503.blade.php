@@ -8,10 +8,10 @@
   {{ trans('adminlte_lang::message.503error') }}
 @endsection
 
-@section('$contentheader_description')
+@section('contentheader_description')
 @endsection
 
-@section('main-content')
+@section('content')
 
   <div class="error-page">
     <h2 class="headline text-red">503</h2>

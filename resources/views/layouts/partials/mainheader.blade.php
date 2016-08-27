@@ -57,7 +57,7 @@
                 </li><!-- end message -->
               </ul><!-- /.menu -->
             </li>
-            <li class="footer"><a href="#">c</a></li>
+            <li class="footer"><a href="#">All Messages</a></li>
           </ul>
         </li><!-- /.messages-menu -->
 
@@ -83,23 +83,23 @@
             <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
           </ul>
         </li>
-        <!-- Tasks Menu -->
-        <li class="dropdown tasks-menu">
+        <!-- Tickets Menu -->
+        <li class="dropdown tickets-menu">
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-flag-o"></i>
             <span class="label label-danger">9</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">{{ trans('adminlte_lang::message.tasks') }}</li>
+            <li class="header">{{ trans('adminlte_lang::message.tickets') }}</li>
             <li>
-              <!-- Inner menu: contains the tasks -->
+              <!-- Inner menu: contains the tickets -->
               <ul class="menu">
-                <li><!-- Task item -->
+                <li><!-- Ticket item -->
                   <a href="#">
-                    <!-- Task title and progress text -->
+                    <!-- Ticket title and progress text -->
                     <h3>
-                      {{ trans('adminlte_lang::message.tasks') }}
+                      {{ trans('adminlte_lang::message.tickets') }}
                       <small class="pull-right">20%</small>
                     </h3>
                     <!-- The progress bar -->
@@ -111,11 +111,11 @@
                       </div>
                     </div>
                   </a>
-                </li><!-- end task item -->
+                </li><!-- end ticket item -->
               </ul>
             </li>
             <li class="footer">
-              <a href="#">{{ trans('adminlte_lang::message.alltasks') }}</a>
+              <a href="#">{{ trans('adminlte_lang::message.alltickets') }}</a>
             </li>
           </ul>
         </li>
@@ -123,7 +123,7 @@
         @if (Auth::guest())
           <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
           <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
-        @else
+          @else
             <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->

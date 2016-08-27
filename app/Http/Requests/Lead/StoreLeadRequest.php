@@ -29,7 +29,7 @@ class StoreLeadRequest extends Request
             'status' => 'required',
             'fk_user_id_assign' => 'required',
             'fk_user_id_created' => '',
-            'fk_client_id' => 'required',
+            'fk_relation_id' => 'required',
             'contact_date' => 'required'
         ];
     }

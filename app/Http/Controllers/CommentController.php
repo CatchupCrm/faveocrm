@@ -7,7 +7,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
-use App\Tasks;
+use App\Ticket;
 
 class CommentController extends Controller
 {
@@ -15,11 +15,11 @@ class CommentController extends Controller
   {
     $this->validate($commentRequest, [
       'description' => 'required',
-      'fk_task_id' => '',
+      'fk_ticket_id' => '',
       'fk_user_id' => '']);
     $input = $commentRequest = array_merge(
       $commentRequest->all(),
-      ['fk_task_id' => $id, 'fk_user_id' => \Auth::id()]
+      ['fk_ticket_id' => $id, 'fk_user_id' => \Auth::id()]
     );
     Comment::create($input);
     Session::flash('flash_message', 'Comment successfully added!'); //Snippet in Master.blade.php

@@ -14,8 +14,8 @@ class Settings extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('task_complete_allowed');
-            $table->integer('task_assign_allowed');
+            $table->integer('ticket_complete_allowed');
+            $table->integer('ticket_assign_allowed');
             $table->integer('lead_complete_allowed');
             $table->integer('lead_assign_allowed');
             $table->integer('time_change_allowed');

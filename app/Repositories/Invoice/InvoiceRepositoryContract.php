@@ -27,7 +27,7 @@ interface InvoiceRepositoryContract
 
   public function find($id);
 
-  public function create($clientid, $timetaskid, $requestData);
+  public function create($relationid, $timeticketid, $requestData);
 
   public function destroy($id);
 

@@ -2,12 +2,12 @@
 namespace App;
 class Dinero
 {
-  public static $client;
+  public static $relation;
   public static $instance;
   protected static $organizationId;
   protected static $accessToken;
-  protected static $clientId;
-  protected static $clientSecret;
+  protected static $relationId;
+  protected static $relationSecret;
   protected static $apiKey;
 
   public static function getInstance()
@@ -18,12 +18,12 @@ class Dinero
     return self::$instance;
   }
 
-  public static function getClient()
+  public static function getRelation()
   {
-    if (!self::$client) {
-      self::$client = new \GuzzleHttp\Client();
-      $token = base64_encode(self::$clientId . ':' . self::$clientSecret);
-      $res = self::$client->request('POST', 'https://authz.dinero.dk/dineroapi/oauth/token', [
+    if (!self::$relation) {
+      self::$relation = new \GuzzleHttp\Relation();
+      $token = base64_encode(self::$relationId . ':' . self::$relationSecret);
+      $res = self::$relation->request('POST', 'https://authz.dinero.dk/dineroapi/oauth/token', [
         'verify' => false,
         'headers' => [
           'Authorization' => 'Basic ' . $token
@@ -38,7 +38,7 @@ class Dinero
       $response = self::convertJson($res);
       self::$accessToken = $response->access_token;
     }
-    return self::$client;
+    return self::$relation;
   }
 
   protected static function convertJson($response)
@@ -54,14 +54,14 @@ class Dinero
   public static function initialize($dbRow)
   {
     self::$organizationId = $dbRow['org_id'];
-    self::$clientId = config('services.dinero.client');
-    self::$clientSecret = config('services.dinero.secret');
+    self::$relationId = config('services.dinero.relation');
+    self::$relationSecret = config('services.dinero.secret');
     self::$apiKey = $dbRow['api_key'];
   }
 
   public static function createInvoice($params)
   {
-    $res = self::getClient()->request('POST', 'https://api.dinero.dk/v1/' . self::$organizationId . '/invoices', [
+    $res = self::getRelation()->request('POST', 'https://api.dinero.dk/v1/' . self::$organizationId . '/invoices', [
       'verify' => false,
       'headers' => [
         'Authorization' => 'Bearer ' . self::$accessToken
@@ -73,7 +73,7 @@ class Dinero
 
   public static function bookInvoice($invoiceGuid, $timestamp)
   {
-    $res = self::getClient()->request('POST', 'https://api.dinero.dk/v1/'
+    $res = self::getRelation()->request('POST', 'https://api.dinero.dk/v1/'
       . self::$organizationId . '/invoices/' . $invoiceGuid . '/book', [
       'verify' => false,
       'headers' => [
@@ -87,7 +87,7 @@ class Dinero
 
   public static function sendInvoice($invoiceGuid, $timestamp)
   {
-    $res = self::getClient()->request('POST', 'https://api.dinero.dk/v1/'
+    $res = self::getRelation()->request('POST', 'https://api.dinero.dk/v1/'
       . self::$organizationId . '/invoices/' . $invoiceGuid . '/email', [
       'verify' => false,
       'headers' => [
@@ -101,7 +101,7 @@ class Dinero
 
   public function getContacts()
   {
-    $res = self::getClient()->request('GET', 'https://api.dinero.dk/v1/'
+    $res = self::getRelation()->request('GET', 'https://api.dinero.dk/v1/'
       . self::$organizationId . '/contacts?field=Name,ContactGuid', [
       'verify' => false,
       'headers' => [

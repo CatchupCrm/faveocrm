@@ -2,7 +2,7 @@
 
 ![Flarepoint Logo](https://cloud.githubusercontent.com/assets/15610490/16813901/ebfd6d94-4933-11e6-9fee-655f6193f38e.png)
 ### Flarepoint CRM
-Flarepoint is a new customer relationship management system (CRM) which purpose is to help you keep track of your customers, tasks etc. Flarepoint is a free, open-source and self-hosted platform based on Laravel PHP Framework.
+Flarepoint is a new customer relationship management system (CRM) which purpose is to help you keep track of your customers, tickets etc. Flarepoint is a free, open-source and self-hosted platform based on Laravel PHP Framework.
 
 ![page_design](https://cloud.githubusercontent.com/assets/15610490/16659700/903393ac-446b-11e6-969c-831fcd698a06.PNG)
 
@@ -31,24 +31,24 @@ If you want to just play around and test the CRM, you can very easily insert dum
 
 ```
     php artisan db:seed --class=UsersDummyTableSeeder (Creates 5 extra users and are required)
-    php artisan db:seed --class=ClientsDummyTableSeeder (Creates 50 new clients)
-    php artisan db:seed --class=TasksDummyTableSeeder (Creates 130 tasks, requires clients & users seeding)
-    php artisan db:seed --class=LeadsDummyTableSeeder (Creates 30 leads, requires clients & users seeding)
+    php artisan db:seed --class=RelationsDummyTableSeeder (Creates 50 new relations)
+    php artisan db:seed --class=TicketsDummyTableSeeder (Creates 130 tickets, requires relations & users seeding)
+    php artisan db:seed --class=LeadsDummyTableSeeder (Creates 30 leads, requires relations & users seeding)
     
 ```
 
-All of these will fill the datbase with client, tasks, leads etc, to give a fast example of how the CRM works, it is important, that nothing else is done as some of the data is inserted to work with a speific ID.
+All of these will fill the datbase with relation, tickets, leads etc, to give a fast example of how the CRM works, it is important, that nothing else is done as some of the data is inserted to work with a speific ID.
 
 
 ## Features overview
-- Tasks management
+- Tickets management
 - Leads management
-- Easy & simple time management for each task
+- Easy & simple time management for each ticket
 - Role management (Create and update your own roles)
 - Roles & global settings
-- Client overview (Keep easy track of open tasks for each client etc)
-- Upload documents to each clients (easy track of contracts and more)
-- Fast overview over your own open tasks, leads etc
+- Relation overview (Keep easy track of open tickets for each relation etc)
+- Upload documents to each relations (easy track of contracts and more)
+- Fast overview over your own open tickets, leads etc
 - Global dashboard
 
 

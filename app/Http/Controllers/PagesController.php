@@ -4,40 +4,40 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Tasks;
+use App\Ticket;
 use Carbon;
-use App\Client;
+use App\Relation;
 use DB;
 use App\User;
 use App\Settings;
 use App\Leads;
 use App\Repositories\User\UserRepositoryContract;
-use App\Repositories\Client\ClientRepositoryContract;
+use App\Repositories\Relation\RelationRepositoryContract;
 use App\Repositories\Setting\SettingRepositoryContract;
-use App\Repositories\Task\TaskRepositoryContract;
+use App\Repositories\Ticket\TicketRepositoryContract;
 use App\Repositories\Lead\LeadRepositoryContract;
 
 class PagesController extends Controller
 {
 
   protected $users;
-  protected $clients;
+  protected $relations;
   protected $settings;
-  protected $tasks;
+  protected $tickets;
   protected $leads;
 
   public function __construct(
     UserRepositoryContract $users,
-    ClientRepositoryContract $clients,
+    RelationRepositoryContract $relations,
     SettingRepositoryContract $settings,
-    taskRepositoryContract $tasks,
+    ticketRepositoryContract $tickets,
     leadRepositoryContract $leads
   )
   {
     $this->users = $users;
-    $this->clients = $clients;
+    $this->relations = $relations;
     $this->settings = $settings;
-    $this->tasks = $tasks;
+    $this->tickets = $tickets;
     $this->leads = $leads;
   }
 
@@ -49,32 +49,32 @@ class PagesController extends Controller
      */
     $companyname = $this->settings->getCompanyName();
     $users = $this->users->getAllUsers();
-    $totalClients = $this->clients->getAllClientsCount();
-    $totalTimeSpent = $this->tasks->totalTimeSpent();
+    $totalRelations = $this->relations->getAllRelationsCount();
+    $totalTimeSpent = $this->tickets->totalTimeSpent();
     /**
-     * Statistics for all-time tasks.
+     * Statistics for all-time tickets.
      *
      */
-    $alltasks = $this->tasks->allTasks();
-    $allCompletedTasks = $this->tasks->allCompletedTasks();
-    $totalPercentageTasks = $this->tasks->percantageCompleted();
+    $alltickets = $this->tickets->allTickets();
+    $allCompletedTickets = $this->tickets->allCompletedTickets();
+    $totalPercentageTickets = $this->tickets->percantageCompleted();
     /**
-     * Statistics for today tasks.
+     * Statistics for today tickets.
      *
      */
-    $completedTasksToday = $this->tasks->completedTasksToday();
-    $createdTasksToday = $this->tasks->createdTasksToday();
+    $completedTicketsToday = $this->tickets->completedTicketsToday();
+    $createdTicketsToday = $this->tickets->createdTicketsToday();
     /**
-     * Statistics for tasks this month.
+     * Statistics for tickets this month.
      *
      */
-    $taskCompletedThisMonth = $this->tasks->completedTasksThisMonth();
+    $ticketCompletedThisMonth = $this->tickets->completedTicketsThisMonth();
     /**
-     * Statistics for tasks each month(For Charts).
+     * Statistics for tickets each month(For Charts).
      *
      */
-    $createdTasksMonthly = $this->tasks->createdTasksMothly();
-    $completedTasksMonthly = $this->tasks->completedTasksMothly();
+    $createdTicketsMonthly = $this->tickets->createdTicketsMothly();
+    $completedTicketsMonthly = $this->tickets->completedTicketsMothly();
     /**
      * Statistics for all-time Leads.
      *
@@ -100,23 +100,23 @@ class PagesController extends Controller
     $completedLeadsMonthly = $this->leads->createdLeadsMonthly();
     $createdLeadsMonthly = $this->leads->completedLeadsMonthly();
     return view('pages.dashboard', compact(
-      'completedTasksToday',
+      'completedTicketsToday',
       'completedLeadsToday',
-      'createdTasksToday',
+      'createdTicketsToday',
       'createdLeadsToday',
-      'createdTasksMonthly',
-      'completedTasksMonthly',
+      'createdTicketsMonthly',
+      'completedTicketsMonthly',
       'completedLeadsMonthly',
       'createdLeadsMonthly',
-      'taskCompletedThisMonth',
+      'ticketCompletedThisMonth',
       'leadCompletedThisMonth',
       'totalTimeSpent',
-      'totalClients',
+      'totalRelations',
       'users',
       'companyname',
-      'alltasks',
-      'allCompletedTasks',
-      'totalPercentageTasks',
+      'alltickets',
+      'allCompletedTickets',
+      'totalPercentageTickets',
       'allleads',
       'allCompletedLeads',
       'totalPercentageLeads'

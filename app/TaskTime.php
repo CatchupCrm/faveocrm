@@ -8,7 +8,7 @@ class TaskTime extends Model
   protected $fillable = [
     'time',
     'overtime',
-    'fk_task_id',
+    'fk_ticket_id',
     'title',
     'comment',
     'value'
@@ -16,11 +16,11 @@ class TaskTime extends Model
 
   protected $hidden = ['remember_token'];
 
-  protected $table = 'tasks_time';
+  protected $table = 'tickets_time';
 
-  public function tasks()
+  public function tickets()
   {
-    return $this->belongsTo('App\Tasks');
+    return $this->belongsTo('App\Ticket');
   }
 
   public function invoices()

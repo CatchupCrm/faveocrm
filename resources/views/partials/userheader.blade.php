@@ -1,9 +1,9 @@
 <div>
   <div class="profilepic"><img class="profilepicsize"
                                @if($contact->image_path != "")
-                               src="../images/{{$companyname}}/{{$contact->image_path}}"
+                               src="#"
                                @else
-                               src="../images/default_avatar.jpg"
+                               src="#"
       @endif />
   </div>
 

@@ -17,7 +17,7 @@ class LeadRepository implements LeadRepositoryContract
 
   public function create($requestData)
   {
-    $fk_client_id = $requestData->get('fk_client_id');
+    $fk_relation_id = $requestData->get('fk_relation_id');
     $input = $requestData = array_merge(
       $requestData->all(),
       ['fk_user_id_created' => \Auth::id(),

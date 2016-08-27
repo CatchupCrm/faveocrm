@@ -1,7 +1,33 @@
 @extends('layouts.master')
 
+
+
+
+@section('Settings')
+  class="active"
+@stop
+@section('settings-bar')
+  active
+@stop
+@section('settings')
+  class="active"
+@stop
+
+@section('heading')
+  <h1>All Departments</h1>
+@stop
+
+
+
+
+
+
+
+
+
+
 @section('content')
-  <div class="col-lg-12 currenttask">
+  <div class="col-lg-12 currentticket">
 
     <table class="table table-bordered table-striped">
       <h3>All Departments</h3>

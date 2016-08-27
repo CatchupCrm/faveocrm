@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Tasks;
+use App\Ticket;
 use Illuminate\Http\Request;
 use Gate;
 use Datatables;
 use Carbon;
 use PHPZen\LaravelRbac\Traits\Rbac;
 use Illuminate\Support\Facades\Input;
-use App\Client;
+use App\Relation;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Repositories\User\UserRepositoryContract;
@@ -70,22 +70,22 @@ class UsersController extends Controller
       ->make(true);
   }
 
-  public function taskData($id)
+  public function ticketData($id)
   {
-    $tasks = Tasks::select(
+    $tickets = Tickets::select(
       ['id', 'title', 'created_at', 'deadline', 'fk_user_id_assign']
     )
       ->where('fk_user_id_assign', $id)->where('status', 1);
-    return Datatables::of($tasks)
-      ->addColumn('titlelink', function ($tasks) {
-        return '<a href="' . route('tasks.show', $tasks->id) . '">' . $tasks->title . '</a>';
+    return Datatables::of($tickets)
+      ->addColumn('titlelink', function ($tickets) {
+        return '<a href="' . route('tickets.show', $tickets->id) . '">' . $tickets->title . '</a>';
       })
-      ->editColumn('created_at', function ($tasks) {
-        return $tasks->created_at ? with(new Carbon($tasks->created_at))
+      ->editColumn('created_at', function ($tickets) {
+        return $tickets->created_at ? with(new Carbon($tickets->created_at))
           ->format('d/m/Y') : '';
       })
-      ->editColumn('deadline', function ($tasks) {
-        return $tasks->created_at ? with(new Carbon($tasks->created_at))
+      ->editColumn('deadline', function ($tickets) {
+        return $tickets->created_at ? with(new Carbon($tickets->created_at))
           ->format('d/m/Y') : '';
       })
       ->make(true);
@@ -93,38 +93,38 @@ class UsersController extends Controller
 
   public function closedTaskData($id)
   {
-    $tasks = Tasks::select(
+    $tickets = Tickets::select(
       ['id', 'title', 'created_at', 'deadline', 'fk_user_id_assign']
     )
       ->where('fk_user_id_assign', $id)->where('status', 2);
-    return Datatables::of($tasks)
-      ->addColumn('titlelink', function ($tasks) {
-        return '<a href="' . route('tasks.show', $tasks->id) . '">' . $tasks->title . '</a>';
+    return Datatables::of($tickets)
+      ->addColumn('titlelink', function ($tickets) {
+        return '<a href="' . route('tickets.show', $tickets->id) . '">' . $tickets->title . '</a>';
       })
-      ->editColumn('created_at', function ($tasks) {
-        return $tasks->created_at ? with(new Carbon($tasks->created_at))
+      ->editColumn('created_at', function ($tickets) {
+        return $tickets->created_at ? with(new Carbon($tickets->created_at))
           ->format('d/m/Y') : '';
       })
-      ->editColumn('deadline', function ($tasks) {
-        return $tasks->created_at ? with(new Carbon($tasks->created_at))
+      ->editColumn('deadline', function ($tickets) {
+        return $tickets->created_at ? with(new Carbon($tickets->created_at))
           ->format('d/m/Y') : '';
       })
       ->make(true);
   }
 
-  public function clientData($id)
+  public function relationData($id)
   {
-    $clients = Client::select(['id', 'name', 'company_name', 'primary_number', 'email'])->where('fk_user_id', $id);
-    return Datatables::of($clients)
-      ->addColumn('clientlink', function ($clients) {
-        return '<a href="' . route('clients.show', $clients->id) . '">' . $clients->name . '</a>';
+    $relations = Relation::select(['id', 'name', 'company_name', 'primary_number', 'email'])->where('fk_user_id', $id);
+    return Datatables::of($relations)
+      ->addColumn('relationlink', function ($relations) {
+        return '<a href="' . route('relations.show', $relations->id) . '">' . $relations->name . '</a>';
       })
-      ->editColumn('created_at', function ($clients) {
-        return $clients->created_at ? with(new Carbon($clients->created_at))
+      ->editColumn('created_at', function ($relations) {
+        return $relations->created_at ? with(new Carbon($relations->created_at))
           ->format('d/m/Y') : '';
       })
-      ->editColumn('deadline', function ($clients) {
-        return $clients->created_at ? with(new Carbon($clients->created_at))
+      ->editColumn('deadline', function ($relations) {
+        return $relations->created_at ? with(new Carbon($relations->created_at))
           ->format('d/m/Y') : '';
       })
       ->make(true);

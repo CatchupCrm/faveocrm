@@ -12,7 +12,7 @@ class Leads extends Model
     'status',
     'fk_user_id_assign',
     'fk_user_id_created',
-    'fk_client_id',
+    'fk_relation_id',
     'contact_date',
   ];
   protected $dates = ['contact_date'];
@@ -29,9 +29,9 @@ class Leads extends Model
     return $this->belongsTo('App\User', 'fk_user_id_created');
   }
 
-  public function clientAssignee()
+  public function relationAssignee()
   {
-    return $this->belongsTo('App\Client', 'fk_client_id');
+    return $this->belongsTo('App\Relation', 'fk_relation_id');
   }
 
   public function notes()

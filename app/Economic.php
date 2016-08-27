@@ -2,19 +2,19 @@
 namespace App;
 class Economic
 {
-  protected $client;
+  protected $relation;
   protected static $organizationId;
   protected static $accessToken;
-  protected static $clientId;
-  protected static $clientSecret;
+  protected static $relationId;
+  protected static $relationSecret;
   protected static $apiKey;
 
 
-  protected function getClient()
+  protected function getRelation()
   {
-    if (!$this->client) {
-      $this->client = new \GuzzleHttp\Client();
-      $res = $this->client->request('GET', 'https://restapi.e-conomic.com/customers', [
+    if (!$this->relation) {
+      $this->relation = new \GuzzleHttp\Relation();
+      $res = $this->relation->request('GET', 'https://restapi.e-conomic.com/customers', [
         'verify' => false,
         'headers' => [
           'X-AppSecretToken:' => 'demo',
@@ -25,12 +25,12 @@ class Economic
       $response = self::convertJson($res);
       self::$accessToken = $response->access_token;
     }
-    return $this->client;
+    return $this->relation;
   }
 
   public static function getContacts()
   {
-    $res = self::getClient()->request('GET', 'https://restapi.e-conomic.com/customers ');
+    $res = self::getRelation()->request('GET', 'https://restapi.e-conomic.com/customers ');
     return json_decode($res->getBody(), true);
   }
 }

@@ -33,8 +33,8 @@ class invoiceHeaderComposer
   public function compose(View $view)
   {
     $invoices = $this->invoices->find($view->getData()['invoice']['id']);
-    $client = $invoices->clients->first();
-    $view->with('client', $client);
+    $relation = $invoices->relations->first();
+    $view->with('relation', $relation);
 
   }
 }

@@ -11,12 +11,12 @@ class Invoice extends Model
     'payment_date'
   ];
 
-  public function clients()
+  public function relations()
   {
-    return $this->belongsToMany('App\Client');
+    return $this->belongsToMany('App\Relation');
   }
 
-  public function tasktime()
+  public function tickettime()
   {
     return $this->belongsToMany('App\TaskTime');
   }

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -25,40 +29,34 @@
       margin-right: 6px;
     }
   </style>
+
+@yield('HeadInclude')
+
+
 </head>
+
+
 <body id="app-layout">
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
+Layout is APP (frontend, not logged in)
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      @yield('PageHeader')
+      @include('layouts.partials.contentheader')
+    </section>
 
 
-    </div>
-
-    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-      <!-- Left Side Of Navbar -->
-
-
-      <!-- Right Side Of Navbar -->
-      <ul class="nav navbar-nav navbar-right">
-        <!-- Authentication Links -->
-        @if (!Auth::guest())
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              {{ Auth::user()->name }} <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-            </ul>
-          </li>
-        @endif
-      </ul>
-    </div>
-  </div>
-</nav>
-<div style="text-align: center; margin-bottom:20px;"><img src="{{ asset('images/FP_logo_big.png') }}" width="400px"
-                                                          alt=""></div>
-@yield('content')
+    <!-- Main content -->
+    <section class="content">
+      <!-- Your Page Content Here -->
+      @yield('content')
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+  @include('layouts.partials.footer')
+</div><!-- ./wrapper -->
 
   <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

@@ -27,17 +27,17 @@
         <div class="small-box bg-aqua">
           <div class="inner">
             <h3>
-              @foreach($taskCompletedThisMonth as $thisMonth)
+              @foreach($ticketCompletedThisMonth as $thisMonth)
                 {{$thisMonth->total}}
               @endforeach
             </h3>
-
-            <p>Tasks completed this month</p>
+            <p>Tickets completed this month</p>
           </div>
           <div class="icon">
             <i class="ion ion-ios-book-outline"></i>
           </div>
-          <a href="{{route('tasks.index')}}" class="small-box-footer">All tasks <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="{{route('tickets.index')}}" class="small-box-footer">All tickets <i
+              class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -64,14 +64,14 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>{{$totalClients}}</h3>
+            <h3>{{$totalRelations}}</h3>
 
-            <p>All Clients</p>
+            <p>All Relations</p>
           </div>
           <div class="icon">
             <i class="ion ion-person"></i>
           </div>
-          <a href="{{route('clients.index')}}" class="small-box-footer">All clients <i
+          <a href="{{route('relations.index')}}" class="small-box-footer">All relations<i
               class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
@@ -101,17 +101,17 @@
     </div>
     <!-- /.row -->
 
-    <?php $createdTaskEachMonths = array(); $taskCreated = array();?>
-    @foreach($createdTasksMonthly as $task)
-      <?php $createdTaskEachMonths[] = date('F', strTotime($task->created_at)) ?>
-      <?php $taskCreated[] = $task->month;?>
+    <?php $createdTaskEachMonths = array(); $ticketCreated = array();?>
+    @foreach($createdTicketsMonthly as $ticket)
+      <?php $createdTaskEachMonths[] = date('F', strTotime($ticket->created_at)) ?>
+      <?php $ticketCreated[] = $ticket->month;?>
     @endforeach
 
-    <?php $completedTaskEachMonths = array(); $taskCompleted = array();?>
+    <?php $completedTaskEachMonths = array(); $ticketCompleted = array();?>
 
-    @foreach($completedTasksMonthly as $tasks)
-      <?php $completedTaskEachMonths[] = date('F', strTotime($tasks->updated_at)) ?>
-      <?php $taskCompleted[] = $tasks->month;?>
+    @foreach($completedTicketsMonthly as $tickets)
+      <?php $completedTaskEachMonths[] = date('F', strTotime($tickets->updated_at)) ?>
+      <?php $ticketCompleted[] = $tickets->month;?>
     @endforeach
 
     <?php $completedLeadEachMonths = array(); $leadsCompleted = array();?>
@@ -131,4 +131,5 @@
 
 
     </div>
+  </div>
 @endsection

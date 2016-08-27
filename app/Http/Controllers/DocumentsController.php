@@ -8,7 +8,7 @@ use App\Document;
 use Session;
 use Excel;
 use Validator;
-use App\Client;
+use App\Relation;
 use App\Settings;
 
 class DocumentsController extends Controller
@@ -22,10 +22,10 @@ class DocumentsController extends Controller
     }
     $file = $request->file('file');
     $destinationPath = public_path() . '/files/' . $companyname;
-    $filename = str_random(8) . '_' . $file->getClientOriginalName();
-    $fileOrginal = $file->getClientOriginalName();
+    $filename = str_random(8) . '_' . $file->getRelationOriginalName();
+    $fileOrginal = $file->getRelationOriginalName();
     $file->move($destinationPath, $filename);
-    $size = $file->getClientSize();
+    $size = $file->getRelationSize();
     $mbsize = $size / 1048576;
     $totaltsize = substr($mbsize, 0, 4);
     if ($totaltsize > 15) {
@@ -34,7 +34,7 @@ class DocumentsController extends Controller
     }
     $input = array_replace(
       $request->all(),
-      ['path' => "$filename", 'size' => "$totaltsize", 'file_display' => "$fileOrginal", 'fk_client_id' => $id]
+      ['path' => "$filename", 'size' => "$totaltsize", 'file_display' => "$fileOrginal", 'fk_relation_id' => $id]
     );
     $document = Document::create($input);
     Session::flash('flash_message', 'File successfully uploaded');
@@ -49,7 +49,7 @@ class DocumentsController extends Controller
     $validator = Validator::make($request->all(), $rules);
     // process the form
     if (!$validator->fails()) {
-      return Redirect(route('clients.create'))->withErrors($validator);
+      return Redirect(route('relations.create'))->withErrors($validator);
     } else {
       try {
         Excel::load('public\imports\contacts.xlsx', function ($reader) {
@@ -60,10 +60,10 @@ class DocumentsController extends Controller
           }
         });
         \Session::flash('flash_message', 'Users uploaded successfully.');
-        // return redirect(route('clients.index'));
+        // return redirect(route('relations.index'));
       } catch (\Exception $e) {
         \Session::flash('flash_message_warning', $e->getMessage());
-        //return redirect(route('clients.index'));
+        //return redirect(route('relations.index'));
       }
     }
   }

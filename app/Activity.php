@@ -24,9 +24,9 @@ class Activity extends model
    *
    * @return object
    */
-  public function task()
+  public function ticket()
   {
-    return $this->belongsTo('App\Tasks', 'task_id', 'id');
+    return $this->belongsTo('App\Ticket', 'ticket_id', 'id');
   }
 
   public function user()
