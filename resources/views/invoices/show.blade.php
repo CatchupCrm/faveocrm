@@ -1,5 +1,24 @@
 @extends('layouts.master')
 
+
+
+
+@section('Invoices')
+  class="active"
+@stop
+@section('invoices-bar')
+  active
+@stop
+@section('invoices')
+  class="active"
+@stop
+
+@section('heading')
+  <h1>Invoice : InvoiceTitle</h1>
+@stop
+
+
+
 @section('content')
   <div class="row">
     @include('partials.relationheader')

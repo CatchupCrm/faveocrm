@@ -94,7 +94,7 @@
      *                     Ticket complete
      *********************************************************************-->
       <div class="panel panel-default movedown">
-        <div class="panel-heading">Task completion</div>
+        <div class="panel-heading">Ticket completion</div>
         <div class="panel-body">
 
           If <b>Allowed</b> only user who are assigned the ticket &amp; the admin can complete the ticket. <br/>
@@ -106,7 +106,7 @@
      *                     Ticket assign
      *********************************************************************-->
       <div class="panel panel-default movedown">
-        <div class="panel-heading">Task Assigned user</div>
+        <div class="panel-heading">Ticket Assigned user</div>
         <div class="panel-body">
 
           If <b>Allowed</b> only user who are assigned the ticket &amp; the admin can assign another user. <br/>

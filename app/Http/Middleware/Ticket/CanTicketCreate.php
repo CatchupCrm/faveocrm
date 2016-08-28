@@ -1,9 +1,9 @@
 <?php
-namespace App\Http\Middleware\Task;
+namespace App\Http\Middleware\Ticket;
 
 use Closure;
 
-class CanTaskCreate
+class CanTicketCreate
 {
   /**
    * Handle an incoming request.

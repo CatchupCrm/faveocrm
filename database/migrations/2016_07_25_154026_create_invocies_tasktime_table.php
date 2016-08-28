@@ -2,7 +2,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvociesTasktimeTable extends Migration
+class CreateInvociesTickettimeTable extends Migration
 {
   /**
    * Run the migrations.

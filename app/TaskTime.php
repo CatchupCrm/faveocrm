@@ -3,7 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TaskTime extends Model
+class TicketTime extends Model
 {
   protected $fillable = [
     'time',

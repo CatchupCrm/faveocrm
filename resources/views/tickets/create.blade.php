@@ -1,4 +1,19 @@
 @extends('layouts.master')
+
+
+
+@section('Tickets')
+  class="active"
+@stop
+@section('tickets-bar')
+  active
+@stop
+@section('tickets')
+  class="active"
+@stop
+
+
+
 @section('heading')
   <h1>Create ticket</h1>
 @stop

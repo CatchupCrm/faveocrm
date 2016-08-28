@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Task;
+namespace App\Http\Requests\Ticket;
 
 use App\Http\Requests\Request;
 
-class StoreTaskRequest extends Request
+class StoreTicketRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

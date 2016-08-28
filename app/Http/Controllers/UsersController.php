@@ -91,7 +91,7 @@ class UsersController extends Controller
       ->make(true);
   }
 
-  public function closedTaskData($id)
+  public function closedTicketData($id)
   {
     $tickets = Tickets::select(
       ['id', 'title', 'created_at', 'deadline', 'fk_user_id_assign']

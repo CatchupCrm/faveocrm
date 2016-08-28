@@ -3,7 +3,7 @@ namespace App\Repositories\Invoice;
 
 use App\Invoice;
 use App\Relations;
-use App\TaskTime;
+use App\TicketTime;
 
 class InvoiceRepository implements InvoiceRepositoryContract
 {
@@ -64,7 +64,7 @@ class InvoiceRepository implements InvoiceRepositoryContract
     $tickettimeId = $invoice->tickettime()->first()->fk_ticket_id;
     $relationid = $invoice->relations()->first()->id;
     $input = array_replace($requestData->all(), ['fk_ticket_id' => "$tickettimeId"]);
-    $tickettime = TaskTime::create($input);
+    $tickettime = TicketTime::create($input);
     $insertedId = $tickettime->id;
     $invoice->tickettime()->attach($insertedId);
     $invoice->relations()->attach($relationid);

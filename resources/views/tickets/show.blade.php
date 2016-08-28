@@ -1,8 +1,21 @@
 @extends('layouts.master')
 
-@section('heading')
 
+@section('Tickets')
+  class="active"
 @stop
+@section('tickets-bar')
+  active
+@stop
+@section('tickets')
+  class="active"
+@stop
+
+@section('heading')
+  <h1>Ticket : TicketTitle</h1>
+@stop
+
+
 
 @section('content')
 
@@ -65,7 +78,7 @@
     </div>
     <div class="col-md-3">
       <div class="sidebarheader">
-        <p>Task information</p>
+        <p>Ticket information</p>
       </div>
       <div class="sidebarbox">
         <p>Assigned to:
@@ -87,9 +100,9 @@
         @endif
 
         @if($tickets->status == 1)
-          Task status: Open
+          Ticket status: Open
         @else
-          Task status: Closed
+          Ticket status: Closed
         @endif
       </div>
       @if($tickets->status == 1)
@@ -159,7 +172,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                   aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Time Managment For This Task ({{$tickets->title}})</h4>
+              <h4 class="modal-title" id="myModalLabel">Time Managment For This Ticket ({{$tickets->title}})</h4>
             </div>
 
             <div class="modal-body">

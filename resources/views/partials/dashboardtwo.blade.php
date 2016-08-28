@@ -89,7 +89,7 @@
       <div id="collapseOne" class="panel-collapse">
         <div class="box-body">
           <div>
-            <graphline class="chart" :labels="{{json_encode($createdTaskEachMonths)}}"
+            <graphline class="chart" :labels="{{json_encode($createdTicketEachMonths)}}"
                        :values="{{json_encode($ticketCreated)}}"
                        :valuesextra="{{json_encode($ticketCompleted)}}"></graphline>
           </div>
@@ -134,7 +134,7 @@
       <div id="collapseThree" class="panel-collapse">
         <div class="box-body">
           <div>
-            <graphline class="chart" :labels="{{json_encode($completedTaskEachMonths)}}"
+            <graphline class="chart" :labels="{{json_encode($completedTicketEachMonths)}}"
                        :values="{{json_encode($ticketCompleted)}}"></graphline>
           </div>
         </div>

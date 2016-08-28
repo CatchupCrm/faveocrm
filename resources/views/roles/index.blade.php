@@ -9,7 +9,7 @@
 @section('settings-bar')
   active
 @stop
-@section('settings')
+@section('roles')
   class="active"
 @stop
 

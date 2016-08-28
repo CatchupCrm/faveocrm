@@ -1,5 +1,21 @@
 @extends('layouts.master')
 
+@section('Settings')
+  class="active"
+@stop
+@section('settings-bar')
+  active
+@stop
+@section('roles')
+  class="active"
+@stop
+
+@section('heading')
+  <h1>Roles : Create Role</h1>
+@stop
+
+
+
 @section('content')
   {!! Form::open([
           'route' => 'roles.store',

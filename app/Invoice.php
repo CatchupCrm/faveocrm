@@ -18,7 +18,7 @@ class Invoice extends Model
 
   public function tickettime()
   {
-    return $this->belongsToMany('App\TaskTime');
+    return $this->belongsToMany('App\TicketTime');
   }
 
 }

@@ -50,16 +50,16 @@ class PermissionsTableSeeder extends Seeder
     /**
      * Tickets Permissions
      */
-    $createTask = new Permissions;
-    $createTask->name = 'Create ticket';
-    $createTask->slug = 'ticket.create';
-    $createTask->description = 'Permission to create ticket';
-    $createTask->save();
-    $updateTask = new Permissions;
-    $updateTask->name = 'Update ticket';
-    $updateTask->slug = 'ticket.update';
-    $updateTask->description = 'Permission to update ticket';
-    $updateTask->save();
+    $createTicket = new Permissions;
+    $createTicket->name = 'Create ticket';
+    $createTicket->slug = 'ticket.create';
+    $createTicket->description = 'Permission to create ticket';
+    $createTicket->save();
+    $updateTicket = new Permissions;
+    $updateTicket->name = 'Update ticket';
+    $updateTicket->slug = 'ticket.update';
+    $updateTicket->description = 'Permission to update ticket';
+    $updateTicket->save();
     /**
      * Leads Permissions
      */

@@ -1,4 +1,17 @@
 @extends('layouts.master')
+
+
+
+@section('Users')
+  class="active"
+@stop
+@section('users-bar')
+  active
+@stop
+@section('users')
+  class="active"
+@stop
+
 @section('heading')
   <h1>All Users</h1>
 @stop

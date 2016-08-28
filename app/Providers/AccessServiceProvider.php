@@ -39,8 +39,8 @@ class AccessServiceProvider extends ServiceProvider
       \App\Repositories\Setting\SettingRepository::class
     );
     $this->app->bind(
-      \App\Repositories\Task\TaskRepositoryContract::class,
-      \App\Repositories\Task\TaskRepository::class
+      \App\Repositories\Ticket\TicketRepositoryContract::class,
+      \App\Repositories\Ticket\TicketRepository::class
     );
     $this->app->bind(
       \App\Repositories\Relation\RelationRepositoryContract::class,

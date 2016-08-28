@@ -8,15 +8,15 @@ use App\User;
 use App\Relation;
 use Illuminate\Http\Request;
 use Gate;
-use App\TaskTime;
+use App\TicketTime;
 use Datatables;
 use Carbon;
 use App\Dinero;
 use App\Billy;
 use App\Integration;
-use App\Http\Requests\Task\StoreTaskRequest;
-use App\Http\Requests\Task\UpdateTimeTaskRequest;
-use App\Repositories\Task\TaskRepositoryContract;
+use App\Http\Requests\Ticket\StoreTicketRequest;
+use App\Http\Requests\Ticket\UpdateTimeTicketRequest;
+use App\Repositories\Ticket\TicketRepositoryContract;
 use App\Repositories\User\UserRepositoryContract;
 use App\Repositories\Relation\RelationRepositoryContract;
 use App\Repositories\Setting\SettingRepositoryContract;
@@ -33,7 +33,7 @@ class TicketsController extends Controller
   protected $invoices;
 
   public function __construct(
-    TaskRepositoryContract $tickets,
+    TicketRepositoryContract $tickets,
     UserRepositoryContract $users,
     RelationRepositoryContract $relations,
     InvoiceRepositoryContract $invoices,
@@ -101,7 +101,7 @@ class TicketsController extends Controller
    *
    * @return Response
    */
-  public function store(StoreTaskRequest $request) // uses __contrust request
+  public function store(StoreTicketRequest $request) // uses __contrust request
   {
     $getInsertedId = $this->tickets->create($request);
     return redirect()->route("tickets.show", $getInsertedId);
@@ -129,7 +129,7 @@ class TicketsController extends Controller
       ->withTickets($this->tickets->find($id))
       ->withUsers($this->users->getAllUsersWithDepartments())
       ->withContacts($invoiceContacts)
-      ->withTasktimes($this->tickets->getTaskTime($id))
+      ->withTickettimes($this->tickets->getTicketTime($id))
       ->withCompanyname($this->settings->getCompanyName())
       ->withApiconnected($apiConnected);
   }
@@ -169,12 +169,12 @@ class TicketsController extends Controller
   {
     $ticket = Tickets::findOrFail($id);
     $relationId = $ticket->relationAssignee()->first()->id;
-    $timeTaskId = $ticket->allTime()->get();
+    $timeTicketId = $ticket->allTime()->get();
     $integrationCheck = Integration::first();
     if ($integrationCheck) {
       $this->tickets->invoice($id, $request);
     }
-    $this->invoices->create($relationId, $timeTaskId, $request->all());
+    $this->invoices->create($relationId, $timeTicketId, $request->all());
     Session()->flash('flash_message', 'Invoice created');
     return redirect()->back();
   }

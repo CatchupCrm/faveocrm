@@ -54,12 +54,12 @@ class Ticket extends Model
 
   public function time()
   {
-    return $this->hasOne('App\TaskTime', 'fk_ticket_id', 'id');
+    return $this->hasOne('App\TicketTime', 'fk_ticket_id', 'id');
   }
 
   public function allTime()
   {
-    return $this->hasMany('App\TaskTime', 'fk_ticket_id', 'id');
+    return $this->hasMany('App\TicketTime', 'fk_ticket_id', 'id');
   }
 
   public function activity()

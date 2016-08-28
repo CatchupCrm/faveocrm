@@ -4,7 +4,7 @@ namespace App\Repositories\Relation;
 use App\Relation;
 use App\Industry;
 use App\Invoices;
-use App\TaskTime;
+use App\TicketTime;
 
 class RelationRepository implements RelationRepositoryContract
 {

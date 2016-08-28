@@ -52,6 +52,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
   Route::patch('leads/updatestatus/{id}', 'LeadsController@updateStatus');
   Route::patch('leads/updatefollowup/{id}', 'LeadsController@updateFollowup')->name('leads.followup');
 
+
+  Route::resource('timelines', 'TimeLinesController');
+
+
+
   Route::resource('tickets', 'TicketsController');
   Route::patch('tickets/updatestatus/{id}', 'TicketsController@updateStatus');
   Route::patch('tickets/updateassign/{id}', 'TicketsController@updateAssign');
@@ -88,7 +93,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
   Route::resource('users', 'UsersController');
   Route::get('users/data', 'UsersController@anyData')->name('users.data');
   Route::get('users/ticketdata/{id}', 'UsersController@ticketData')->name('users.ticketdata');
-  Route::get('users/closedticketdata/{id}', 'UsersController@closedTaskData')->name('users.closedticketdata');
+  Route::get('users/closedticketdata/{id}', 'UsersController@closedTicketData')->name('users.closedticketdata');
   Route::get('users/relationdata/{id}', 'UsersController@relationData')->name('users.relationdata');
 
 

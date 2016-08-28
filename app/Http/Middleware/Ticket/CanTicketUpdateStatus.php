@@ -1,11 +1,11 @@
 <?php
-namespace App\Http\Middleware\Task;
+namespace App\Http\Middleware\Ticket;
 
 use Closure;
 use App\Settings;
 use App\Ticket;
 
-class CanTaskUpdateStatus
+class CanTicketUpdateStatus
 {
   /**
    * Handle an incoming request.

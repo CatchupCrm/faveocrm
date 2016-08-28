@@ -1,5 +1,24 @@
 @extends('layouts.master')
 
+
+@section('Settings')
+  class="active"
+@stop
+@section('settings-bar')
+  active
+@stop
+@section('departments')
+  class="active"
+@stop
+
+@section('heading')
+  <h1>DepartmentsL Create</h1>
+@stop
+
+
+
+
+
 @section('content')
   {!! Form::open([
           'route' => 'departments.store',

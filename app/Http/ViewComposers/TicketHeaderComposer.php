@@ -2,7 +2,7 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Repositories\Task\TaskRepositoryContract;
+use App\Repositories\Ticket\TicketRepositoryContract;
 
 class ticketHeaderComposer
 {
@@ -19,7 +19,7 @@ class ticketHeaderComposer
    * @param  ticketRepository $tickets
    * @return void
    */
-  public function __construct(TaskRepositoryContract $tickets)
+  public function __construct(TicketRepositoryContract $tickets)
   {
     $this->tickets = $tickets;
   }

@@ -1,15 +1,15 @@
 <?php
-namespace App\Repositories\Task;
+namespace App\Repositories\Ticket;
 
 use App\Ticket;
 use Notifynder;
 use Carbon;
 use App\Activity;
-use App\TaskTime;
+use App\TicketTime;
 use DB;
 use App\Integration;
 
-class TaskRepository implements TaskRepositoryContract
+class TicketRepository implements TicketRepositoryContract
 {
 
   public function find($id)
@@ -24,16 +24,16 @@ class TaskRepository implements TaskRepositoryContract
     return $tickets;
   }
 
-  public function GetTimeForTask($id)
+  public function GetTimeForTicket($id)
   {
     $ticketstime = Tickets::findOrFail($id);
     $ticketstime->allTime;
     return $ticketstime;
   }
 
-  public function getTaskTime($id)
+  public function getTicketTime($id)
   {
-    return TaskTime::where('fk_ticket_id', $id)->get();
+    return TicketTime::where('fk_ticket_id', $id)->get();
   }
 
 
@@ -84,7 +84,7 @@ class TaskRepository implements TaskRepositoryContract
   {
     $ticket = Tickets::findOrFail($id);
     $input = array_replace($requestData->all(), ['fk_ticket_id' => "$ticket->id"]);
-    TaskTime::create($input);
+    TicketTime::create($input);
     $activityinput = array_merge(
       ['text' => Auth()->user()->name . ' Inserted a new time for this ticket',
         'user_id' => Auth()->id(),
@@ -115,7 +115,7 @@ class TaskRepository implements TaskRepositoryContract
   {
     $contatGuid = $requestData->invoiceContact;
     $ticketname = Tickets::find($id);
-    $timemanger = TaskTime::where('fk_ticket_id', $id)->get();
+    $timemanger = TicketTime::where('fk_ticket_id', $id)->get();
     $sendMail = $requestData->sendMail;
     $productlines = [];
     foreach ($timemanger as $time) {

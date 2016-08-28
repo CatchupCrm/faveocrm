@@ -1,11 +1,11 @@
 <?php
-namespace App\Repositories\Task;
-interface TaskRepositoryContract
+namespace App\Repositories\Ticket;
+interface TicketRepositoryContract
 {
 
   public function find($id);
 
-  public function getTaskTime($id);
+  public function getTicketTime($id);
 
   public function create($requestData);
 

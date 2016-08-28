@@ -1,4 +1,17 @@
 @extends('layouts.master')
+
+@section('Relations')
+  class="active"
+@stop
+@section('relations-bar')
+  active
+@stop
+@section('relations')
+  class="active"
+@stop
+
+
+
 @section('heading')
   <h1>Create Relation</h1>
 @stop

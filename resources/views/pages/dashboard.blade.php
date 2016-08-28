@@ -101,16 +101,16 @@
     </div>
     <!-- /.row -->
 
-    <?php $createdTaskEachMonths = array(); $ticketCreated = array();?>
+    <?php $createdTicketEachMonths = array(); $ticketCreated = array();?>
     @foreach($createdTicketsMonthly as $ticket)
-      <?php $createdTaskEachMonths[] = date('F', strTotime($ticket->created_at)) ?>
+      <?php $createdTicketEachMonths[] = date('F', strTotime($ticket->created_at)) ?>
       <?php $ticketCreated[] = $ticket->month;?>
     @endforeach
 
-    <?php $completedTaskEachMonths = array(); $ticketCompleted = array();?>
+    <?php $completedTicketEachMonths = array(); $ticketCompleted = array();?>
 
     @foreach($completedTicketsMonthly as $tickets)
-      <?php $completedTaskEachMonths[] = date('F', strTotime($tickets->updated_at)) ?>
+      <?php $completedTicketEachMonths[] = date('F', strTotime($tickets->updated_at)) ?>
       <?php $ticketCompleted[] = $tickets->month;?>
     @endforeach
 

@@ -3,7 +3,7 @@ namespace App\Providers;
 
 use App\Ticket;
 use App\User;
-use App\Policies\allowTaskComplete;
+use App\Policies\allowTicketComplete;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
    */
   protected $policies = [
     'App\Model' => 'App\Policies\ModelPolicy',
-    Tickets::class => allowTaskComplete::class,
+    Tickets::class => allowTicketComplete::class,
   ];
 
   /**

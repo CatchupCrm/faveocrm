@@ -20,6 +20,10 @@
   <link href="{{ URL::asset('css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ URL::asset('css/dropzone.css') }}" rel="stylesheet" type="text/css">
 
+
+  <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.vertical-tabs.css') }}" />
+
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <script src="//js.pusher.com/3.0/pusher.min.js"></script>
 

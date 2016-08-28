@@ -142,6 +142,18 @@ return [
     App\Providers\ViewComposerServiceProvider::class,
     Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
+
+    \Cviebrock\EloquentTaggable\ServiceProvider::class,
+    DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+    Cviebrock\EloquentSluggable\ServiceProvider::class,
+    Cviebrock\LaravelElasticsearch\ServiceProvider::class, 
+
+    'Baum\Providers\BaumServiceProvider',
+    Laracasts\Flash\FlashServiceProvider::class,
+    Caffeinated\Menus\MenusServiceProvider::class,
+
+
+
   ],
   /*
   |--------------------------------------------------------------------------
@@ -190,6 +202,14 @@ return [
     'Carbon' => Carbon\Carbon::class,
     'Notifynder' => Fenos\Notifynder\Facades\Notifynder::class,
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+    'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+    'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
+
+    'Menu' => Caffeinated\Menus\Facades\Menu::class,
+
+
+
     /*
     * Acacha AdminLTE template alias
     */

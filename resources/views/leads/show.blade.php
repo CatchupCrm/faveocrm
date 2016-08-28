@@ -1,8 +1,21 @@
 @extends('layouts.master')
 
-@section('heading')
 
+@section('Relations')
+  class="active"
 @stop
+@section('relations-bar')
+  active
+@stop
+@section('leads')
+  class="active"
+@stop
+
+@section('heading')
+  <h1>Lead : Lead Title</h1>
+@stop
+
+
 
 @section('content')
   <script>
@@ -148,7 +161,7 @@
     </div>
     <div class="col-md-3">
       <div class="sidebarheader">
-        <p>Task information</p>
+        <p>Ticket information</p>
       </div>
       <div class="sidebarbox">
         <p>Assigned to:

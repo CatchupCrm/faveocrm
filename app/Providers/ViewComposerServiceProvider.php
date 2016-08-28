@@ -19,7 +19,7 @@ class ViewComposerServiceProvider extends ServiceProvider
       ['relations.show'], 'App\Http\ViewComposers\RelationHeaderComposer'
     );
     view()->composer(
-      ['tickets.show'], 'App\Http\ViewComposers\TaskHeaderComposer'
+      ['tickets.show'], 'App\Http\ViewComposers\TicketHeaderComposer'
     );
     view()->composer(
       ['invoices.show'], 'App\Http\ViewComposers\InvoiceHeaderComposer'
